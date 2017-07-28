@@ -35,6 +35,7 @@ namespace emc
     bool is_stereo() const;
     bool is_opengl_used() const;
     bool is_mirrored() const;
+    float get_brightness() const;
 
   private:
     display(CGDirectDisplayID display_id);

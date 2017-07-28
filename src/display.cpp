@@ -18,9 +18,13 @@
 #include <system_error>
 #include <sstream>
 #include "gettext_defs.h"
+#include <IOKit/graphics/IOGraphicsLib.h>
 
 namespace emc
 {
+  static io_service_t find_io_service(CGDirectDisplayID display_id);
+  static bool CFNumberEqualsUInt32(CFNumberRef number, uint32_t uint32);
+
   std::vector<display> display::find_active()
   {
     std::vector<display> active_displays;
@@ -115,5 +119,81 @@ namespace emc
   bool display::is_mirrored() const
   {
     return mirrored;
+  }
+
+  float display::get_brightness() const
+  {
+    io_service_t service = find_io_service(this->display_id);
+    float current_brightness;
+
+    IOReturn ret = IODisplayGetFloatParameter(service,
+                                              kNilOptions,
+                                              CFSTR(kIODisplayBrightnessKey),
+                                              &current_brightness);
+
+    if (ret != kIOReturnSuccess)
+    {
+      std::ostringstream oss;
+      oss << _("IODisplayGetFloatParameter returned error: ");
+      oss << ret;
+
+      throw std::runtime_error(oss.str());
+    }
+
+    return current_brightness;
+  }
+
+  io_service_t find_io_service(CGDirectDisplayID display_id)
+  {
+    uint32_t vendor = CGDisplayVendorNumber(display_id);
+    uint32_t model = CGDisplayModelNumber(display_id);
+    uint32_t serial = CGDisplaySerialNumber(display_id);
+
+    io_iterator_t service_iterator;
+
+    if (IOServiceGetMatchingServices(kIOMasterPortDefault,
+                                     IOServiceMatching("IODisplayConnect"),
+                                     &service_iterator) != kIOReturnSuccess)
+      return 0;
+
+    io_service_t service, matching_service = 0;
+
+    while ((service = IOIteratorNext(service_iterator)) != 0)
+    {
+      CFDictionaryRef info = IODisplayCreateInfoDictionary(service, kIODisplayNoProductName);
+
+      auto vendorID = static_cast<CFNumberRef>(CFDictionaryGetValue(info, CFSTR(kDisplayVendorID)));
+      auto productID = static_cast<CFNumberRef>(CFDictionaryGetValue(info, CFSTR(kDisplayProductID)));
+      auto serialNumber = static_cast<CFNumberRef>(CFDictionaryGetValue(info, CFSTR(kDisplaySerialNumber)));
+
+      if (CFNumberEqualsUInt32(vendorID, vendor) &&
+          CFNumberEqualsUInt32(productID, model) &&
+          CFNumberEqualsUInt32(serialNumber, serial))
+      {
+        matching_service = service;
+
+        CFRelease(info);
+        break;
+      }
+
+      CFRelease(info);
+    }
+
+    IOObjectRelease(service_iterator);
+    return matching_service;
+  }
+
+  bool CFNumberEqualsUInt32(CFNumberRef number, uint32_t uint32)
+  {
+    if (number == nullptr)
+      return (uint32 == 0);
+
+    /* there's no CFNumber type guaranteed to be a uint32, so pick something bigger
+       that's guaranteed not to truncate */
+    int64_t int64;
+
+    return CFNumberGetValue(number, kCFNumberSInt64Type, &int64) &&
+           int64 == uint32;
+
   }
 }
