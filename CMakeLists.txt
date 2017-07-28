@@ -9,7 +9,8 @@ set(SOURCE_FILES
         src/gettext.h
         src/gettext_defs.h
         src/display.cpp src/display.h
-        src/CFTypeGuard.cpp src/CFTypeGuard.h)
+        src/CFTypeGuard.cpp src/CFTypeGuard.h
+        src/object-guard.h)
 add_executable(display_control ${SOURCE_FILES})
 
 if (APPLE)
