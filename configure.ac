@@ -62,6 +62,10 @@ AC_CHECK_HEADERS([unistd.h], [], [AC_MSG_ERROR([A required header file is missin
 AC_CHECK_HEADERS([IOKit/graphics/IOGraphicsLib.h], [], [AC_MSG_ERROR([A required header file is missing.])])
 AC_CHECK_HEADERS([ApplicationServices/ApplicationServices.h], [], [AC_MSG_ERROR([A required header file is missing.])])
 
+# Check for optional getopt_long
+AC_CHECK_HEADERS([getopt.h])
+AS_VAR_IF([ac_cv_header_getopt_h], ["yes"], [AC_CHECK_FUNCS([getopt_long])])
+
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CHECK_HEADER_STDBOOL
 AC_TYPE_INT64_T
