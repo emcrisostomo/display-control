@@ -57,5 +57,63 @@ namespace emc
 
   display::display(CGDirectDisplayID display_id) : display_id(display_id)
   {
+    //@formatter:off
+    active = static_cast<bool>(CGDisplayIsActive(this->display_id));
+    asleep = static_cast<bool>(CGDisplayIsAsleep(this->display_id));
+    builtin = static_cast<bool>(CGDisplayIsBuiltin(this->display_id));
+    in_mirror_set = static_cast<bool>(CGDisplayIsInMirrorSet(this->display_id));
+    main = static_cast<bool>(CGDisplayIsMain(this->display_id));
+    online = static_cast<bool>(CGDisplayIsOnline(this->display_id));
+    stereo = static_cast<bool>(CGDisplayIsStereo(this->display_id));
+    mirrored_display = CGDisplayMirrorsDisplay(this->display_id);
+    opengl_used = static_cast<bool>(CGDisplayUsesOpenGLAcceleration(this->display_id));
+
+    mirrored = (mirrored_display == kCGNullDirectDisplay);
+    //@formatter:on
+  }
+
+  bool display::is_active() const
+  {
+    return active;
+  }
+
+  bool display::is_asleep() const
+  {
+    return asleep;
+  }
+
+  bool display::is_builtin() const
+  {
+    return builtin;
+  }
+
+  bool display::is_in_mirror_set() const
+  {
+    return in_mirror_set;
+  }
+
+  bool display::is_main() const
+  {
+    return main;
+  }
+
+  bool display::is_online() const
+  {
+    return online;
+  }
+
+  bool display::is_stereo() const
+  {
+    return stereo;
+  }
+
+  bool display::is_opengl_used() const
+  {
+    return opengl_used;
+  }
+
+  bool display::is_mirrored() const
+  {
+    return mirrored;
   }
 }

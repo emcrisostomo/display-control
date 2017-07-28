@@ -26,12 +26,31 @@ namespace emc
   {
   public:
     static std::vector<display> find_active();
+    bool is_active() const;
+    bool is_asleep() const;
+    bool is_builtin() const;
+    bool is_in_mirror_set() const;
+    bool is_main() const;
+    bool is_online() const;
+    bool is_stereo() const;
+    bool is_opengl_used() const;
+    bool is_mirrored() const;
 
   private:
     display(CGDirectDisplayID display_id);
 
     CGDirectDisplayID display_id;
     static const int DC_MAX_DISPLAYS = 128;
+    bool active;
+    bool asleep;
+    bool builtin;
+    bool in_mirror_set;
+    bool main;
+    bool online;
+    bool stereo;
+    CGDirectDisplayID mirrored_display;
+    bool opengl_used;
+    bool mirrored;
   };
 }
 
