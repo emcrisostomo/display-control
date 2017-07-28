@@ -14,7 +14,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "display_control_config.h"
+#include "../display_control_config.h"
 #include "display-control.h"
 #include "gettext.h"
 #ifdef HAVE_GETOPT_LONG
