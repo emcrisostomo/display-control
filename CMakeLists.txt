@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES
         src/display-control.cpp
         src/gettext.h
-        src/display-control.h)
+        src/gettext_defs.h
+        src/display-control.h src/display.cpp src/display.h)
 add_executable(display_control ${SOURCE_FILES})
 
 if (APPLE)
