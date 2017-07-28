@@ -245,6 +245,7 @@ void list_displays()
 
   for (auto& d : active_displays)
   {
-    std::cout << "Monitor!\n";
+    std::cout << "Monitor: " << d.is_active() << "\n";
+    std::cout << "         " << d.get_brightness() << "\n";
   }
 }
