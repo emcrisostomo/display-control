@@ -151,8 +151,7 @@ static bool check_command()
   switch (command_counter)
   {
   case 0:
-    std::cerr << _("No commands specified.") << "\n";
-    return false;
+    lflag = true;
 
   case 1:
     return true;
