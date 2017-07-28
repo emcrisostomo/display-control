@@ -19,6 +19,7 @@
 #include <sstream>
 #include "gettext_defs.h"
 #include "CFTypeGuard.h"
+#include "object-guard.h"
 #include <IOKit/graphics/IOGraphicsLib.h>
 
 namespace emc
@@ -157,7 +158,9 @@ namespace emc
                                      &service_iterator) != kIOReturnSuccess)
       return 0;
 
-    io_service_t service, matching_service = 0;
+    emc::object_guard<io_iterator_t, decltype(IOObjectRelease)> service_guard(service_iterator, IOObjectRelease);
+
+    io_service_t service;
 
     while ((service = IOIteratorNext(service_iterator)) != 0)
     {
@@ -172,13 +175,11 @@ namespace emc
           CFNumberEqualsUInt32(productID, model) &&
           CFNumberEqualsUInt32(serialNumber, serial))
       {
-        matching_service = service;
-        break;
+        return service;
       }
     }
 
-    IOObjectRelease(service_iterator);
-    return matching_service;
+    return 0;
   }
 
   bool CFNumberEqualsUInt32(CFNumberRef number, uint32_t uint32)
