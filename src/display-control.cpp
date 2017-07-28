@@ -243,9 +243,21 @@ void list_displays()
 {
   std::vector<emc::display> active_displays = emc::display::find_active();
 
-  for (auto& d : active_displays)
+  unsigned int i = 0;
+
+  for (const auto& d : active_displays)
   {
-    std::cout << "Monitor: " << d.is_active() << "\n";
-    std::cout << "         " << d.get_brightness() << "\n";
+    try
+    {
+      float current_brightness = d.get_brightness();
+
+      std::cout << i << ":" << current_brightness << "\n";
+    }
+    catch (std::runtime_error& ex)
+    {
+      std::cout << i << ":" << _("n/a") << "\n";
+    }
+
+    ++i;
   }
 }
