@@ -3,6 +3,7 @@
 Makefile.in
 /ar-lib
 /display_control
+/display-control-*/
 /mdate-sh
 /py-compile
 /test-driver
