@@ -59,6 +59,7 @@ AX_CXXFLAGS_WARN_ALL
 
 # Checks for header files.
 AC_CHECK_HEADERS([unistd.h], [], [AC_MSG_ERROR([A required header file is missing.])])
+AC_CHECK_HEADERS([CoreFoundation/CoreFoundation.h], [], [AC_MSG_ERROR([A required header file is missing.])])
 AC_CHECK_HEADERS([IOKit/graphics/IOGraphicsLib.h], [], [AC_MSG_ERROR([A required header file is missing.])])
 AC_CHECK_HEADERS([ApplicationServices/ApplicationServices.h], [], [AC_MSG_ERROR([A required header file is missing.])])
 
