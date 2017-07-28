@@ -18,6 +18,7 @@
 #include <system_error>
 #include <sstream>
 #include "gettext_defs.h"
+#include "CFTypeGuard.h"
 #include <IOKit/graphics/IOGraphicsLib.h>
 
 namespace emc
@@ -161,6 +162,7 @@ namespace emc
     while ((service = IOIteratorNext(service_iterator)) != 0)
     {
       CFDictionaryRef info = IODisplayCreateInfoDictionary(service, kIODisplayNoProductName);
+      emc::CFTypeGuard info_guard(info);
 
       auto vendorID = static_cast<CFNumberRef>(CFDictionaryGetValue(info, CFSTR(kDisplayVendorID)));
       auto productID = static_cast<CFNumberRef>(CFDictionaryGetValue(info, CFSTR(kDisplayProductID)));
@@ -171,12 +173,8 @@ namespace emc
           CFNumberEqualsUInt32(serialNumber, serial))
       {
         matching_service = service;
-
-        CFRelease(info);
         break;
       }
-
-      CFRelease(info);
     }
 
     IOObjectRelease(service_iterator);
