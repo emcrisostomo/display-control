@@ -9,6 +9,9 @@ Makefile.in
 /test-driver
 /ylwrap
 
+# Distribution files
+*.tar.gz
+
 # http://www.gnu.org/software/autoconf
 
 # GNU Build System
