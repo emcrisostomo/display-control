@@ -29,7 +29,9 @@
 #define _(String) gettext(String)
 static void print_version(std::ostream& stream);
 static void usage(std::ostream& stream);
+static bool check_command();
 
+static unsigned int command_counter = 0;
 static bool bflag = false;
 static bool lflag = false;
 static bool vflag = false;
@@ -83,6 +85,7 @@ static void parse_opts(int argc, char *const argv[])
       }
 
       bflag = true;
+      ++command_counter;
       break;
 
     case 'd':
@@ -113,6 +116,7 @@ static void parse_opts(int argc, char *const argv[])
 
     case 'l':
       lflag = true;
+      ++command_counter;
       break;
 
     case 'v':
@@ -129,26 +133,48 @@ static void parse_opts(int argc, char *const argv[])
     }
   }
 
+  if (!check_command())
+  {
+    exit(DC_EXIT_ILLEGAL_COMMAND);
+  }
 
+
+}
+
+static bool check_command()
+{
+  switch (command_counter)
+  {
+  case 0:
+    std::cerr << _("No commands specified.") << "\n";
+    return false;
+
+  case 1:
+    return true;
+
+  default:
+    std::cerr << _("Only one command can be specified.") << "\n";
+    return false;
+  }
 }
 
 static void print_version(std::ostream& stream)
 {
+  //@formatter:off
   stream << PACKAGE_STRING << "\n";
-  stream <<
-         "Copyright (C) 2017 Enrico M. Crisostomo <enrico.m.crisostomo@gmail.com>.\n";
-  stream <<
-         _("License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n");
-  stream <<
-         _("This is free software: you are free to change and redistribute it.\n");
+  stream << "Copyright (C) 2017 Enrico M. Crisostomo <enrico.m.crisostomo@gmail.com>.\n";
+  stream << _("License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n");
+  stream << _("This is free software: you are free to change and redistribute it.\n");
   stream << _("There is NO WARRANTY, to the extent permitted by law.\n");
   stream << "\n";
   stream << _("Written by Enrico M. Crisostomo.");
   stream << std::endl;
+  //@formatter:off
 }
 
 static void usage(std::ostream& stream)
 {
+  //@formatter:off
 #ifdef HAVE_GETOPT_LONG
   stream << PACKAGE_STRING << "\n\n";
   stream << _("Usage:\n");
@@ -163,7 +189,7 @@ static void usage(std::ostream& stream)
   stream << "     --version         " << _("Print the version of ") << PACKAGE_NAME << _(" and exit.\n");
   stream << "\n";
 #else
-  string option_string = "[01adeEfhilLMmnortuvx]";
+  string option_string = "[bdhlv]";
 
   stream << PACKAGE_STRING << "\n\n";
   stream << _("Usage:\n");
@@ -183,6 +209,7 @@ static void usage(std::ostream& stream)
   stream << _("Report bugs to <") << PACKAGE_BUGREPORT << ">.\n";
   stream << PACKAGE << _(" home page: <") << PACKAGE_URL << ">.";
   stream << std::endl;
+  //@formatter:on
 }
 
 int main(int argc, char *const argv[])

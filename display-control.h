@@ -21,5 +21,6 @@ static const int DC_OPT_VERSION = 128;
 static const int DC_EXIT_OK = 0;
 static const int DC_EXIT_ILLEGAL_VALUE = 1;
 static const int DC_EXIT_UNKNOWN_OPT = 2;
+static const int DC_EXIT_ILLEGAL_COMMAND = 3;
 
 #endif //DISPLAY_CONTROL_DISPLAY_CONTROL_H
