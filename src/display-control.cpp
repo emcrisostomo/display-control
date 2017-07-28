@@ -16,15 +16,14 @@
 
 #include "../display_control_config.h"
 #include "display-control.h"
-#include "gettext.h"
+#include "gettext_defs.h"
 #ifdef HAVE_GETOPT_LONG
 #  include <getopt.h>
 #endif
 #include <iostream>
 #include <string>
 #include <vector>
-#include <IOKit/graphics/IOGraphicsLib.h>
-#include <ApplicationServices/ApplicationServices.h>
+#include "display.h"
 
 #define _(String) gettext(String)
 static void print_version(std::ostream& stream);
@@ -229,12 +228,23 @@ int main(int argc, char *const argv[])
 
   parse_opts(argc, argv);
 
-  if (lflag) list_displays();
-
+  try
+  {
+    if (lflag) list_displays();
+  }
+  catch (std::exception& ex)
+  {
+    std::cerr << _("An error occurred: ") << ex.what() << "\n";
+  }
   return DC_EXIT_OK;
 }
 
 void list_displays()
 {
+  std::vector<emc::display> active_displays = emc::display::find_active();
 
+  for (auto& d : active_displays)
+  {
+    std::cout << "Monitor!\n";
+  }
 }
