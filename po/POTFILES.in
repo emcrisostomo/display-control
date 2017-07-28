@@ -15,4 +15,5 @@
 #
 # List of source files which contain translatable strings.
 #
-display-control.cpp
+src/display-control.cpp
+src/display.cpp
