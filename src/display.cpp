@@ -25,7 +25,7 @@
 namespace emc
 {
   static io_service_t find_io_service(CGDirectDisplayID display_id);
-  static bool CFNumberEqualsUInt32(CFNumberRef number, uint32_t uint32);
+  static bool compare(CFNumberRef number, uint32_t uint32);
 
   std::vector<display> display::find_active()
   {
@@ -171,9 +171,9 @@ namespace emc
       auto productID = static_cast<CFNumberRef>(CFDictionaryGetValue(info, CFSTR(kDisplayProductID)));
       auto serialNumber = static_cast<CFNumberRef>(CFDictionaryGetValue(info, CFSTR(kDisplaySerialNumber)));
 
-      if (CFNumberEqualsUInt32(vendorID, vendor) &&
-          CFNumberEqualsUInt32(productID, model) &&
-          CFNumberEqualsUInt32(serialNumber, serial))
+      if (compare(vendorID, vendor) &&
+          compare(productID, model) &&
+          compare(serialNumber, serial))
       {
         return service;
       }
@@ -182,17 +182,14 @@ namespace emc
     return 0;
   }
 
-  bool CFNumberEqualsUInt32(CFNumberRef number, uint32_t uint32)
+  bool compare(CFNumberRef number, uint32_t uint32)
   {
-    if (number == nullptr)
-      return (uint32 == 0);
+    if (number == nullptr) return (uint32 == 0);
 
-    /* there's no CFNumber type guaranteed to be a uint32, so pick something bigger
-       that's guaranteed not to truncate */
-    int64_t int64;
+    int64_t number_value;
 
-    return CFNumberGetValue(number, kCFNumberSInt64Type, &int64) &&
-           int64 == uint32;
+    return CFNumberGetValue(number, kCFNumberSInt64Type, &number_value) &&
+           number_value == uint32;
 
   }
 }
