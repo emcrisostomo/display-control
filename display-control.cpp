@@ -31,6 +31,7 @@ static void print_version(std::ostream& stream);
 static void usage(std::ostream& stream);
 static bool check_command();
 
+void list_displays();
 static unsigned int command_counter = 0;
 static bool bflag = false;
 static bool lflag = false;
@@ -138,7 +139,12 @@ static void parse_opts(int argc, char *const argv[])
     exit(DC_EXIT_ILLEGAL_COMMAND);
   }
 
-
+  // validate options
+  if (optind != argc)
+  {
+    std::cerr << _("Invalid number of arguments.") << "\n";
+    exit(DC_EXIT_UNKNOWN_OPT);
+  }
 }
 
 static bool check_command()
@@ -222,5 +228,13 @@ int main(int argc, char *const argv[])
 #endif
 
   parse_opts(argc, argv);
+
+  if (lflag) list_displays();
+
+  return DC_EXIT_OK;
+}
+
+void list_displays()
+{
 
 }
