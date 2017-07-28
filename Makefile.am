@@ -24,7 +24,7 @@ libtool: $(LIBTOOL_DEPS)
 	$(SHELL) $(top_builddir)/config.status libtool
 
 # binaries
-bin_PROGRAMS = display_control
+bin_PROGRAMS = display-control
 display_control_SOURCES  = main.cpp
 display_control_SOURCES += gettext.h
 
