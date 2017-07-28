@@ -25,7 +25,7 @@ libtool: $(LIBTOOL_DEPS)
 
 # binaries
 bin_PROGRAMS = display-control
-display_control_SOURCES  = display-control.cpp
+display_control_SOURCES  = display-control.cpp display-control.h
 display_control_SOURCES += gettext.h
 
 display_control_LDFLAGS  = -framework IOKit

@@ -3,7 +3,7 @@ project(display_control)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES display-control.cpp gettext.h)
+set(SOURCE_FILES display-control.cpp gettext.h display-control.h)
 add_executable(display_control ${SOURCE_FILES})
 
 if (APPLE)
