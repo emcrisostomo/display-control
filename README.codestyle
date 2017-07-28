@@ -1,8 +1,8 @@
 README.codestyle
 ================
 
-The indent style used by `fswatch` is a custom Allman (BSD) style.  The code is
-formatted using NetBeans with the following format settings:
+The indent style used by this project is a custom Allman (BSD) style.  The code
+is formatted using NetBeans with the following format settings:
 
     Indents
     Indent Size = 2

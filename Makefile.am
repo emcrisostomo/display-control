@@ -30,7 +30,7 @@ display_control_SOURCES = main.cpp
 display_control_LDFLAGS  = -framework IOKit
 display_control_LDFLAGS += -framework ApplicationServices
 
-# Link fswatch against libintl if gettext is being used
+# Link against libintl if gettext is being used
 display_control_LDADD = @LTLIBINTL@
 
 # distributed files

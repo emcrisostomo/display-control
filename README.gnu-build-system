@@ -4,7 +4,7 @@ README.gnu-build-system
 Introduction
 ------------
 
-`fswatch` is built using the GNU Build System (a.k.a. the Autotools) and
+This project is built using the GNU Build System (a.k.a. the Autotools) and
 developers willing to modify the configuration files must have the GNU Build
 System installed in order to do so.
 
