@@ -27,29 +27,30 @@
 #include <ApplicationServices/ApplicationServices.h>
 
 #define _(String) gettext(String)
-
-static bool lflag = false;
-static bool mflag = false;
-static bool vflag = false;
-static std::vector<int> displays;
-
 static void print_version(std::ostream& stream);
 static void usage(std::ostream& stream);
+
+static bool bflag = false;
+static bool lflag = false;
+static bool vflag = false;
+static std::vector<int> displays;
+static float brightness = 0.0;
 
 static void parse_opts(int argc, char *const argv[])
 {
   int ch;
-  std::string short_options = "d:lmv";
+  std::string short_options = "b:d:lv";
 
 #ifdef HAVE_GETOPT_LONG
   int option_index = 0;
   static struct option long_options[] = {
-    {"display", required_argument, nullptr, 'd'},
-    {"help",    no_argument,       nullptr, 'h'},
-    {"list",    no_argument,       nullptr, 'l'},
-    {"verbose", no_argument,       nullptr, 'v'},
-    {"version", no_argument,       nullptr, DC_OPT_VERSION},
-    {nullptr, 0,                   nullptr, 0}
+    {"brightness", required_argument, nullptr, 'b'},
+    {"display",    required_argument, nullptr, 'd'},
+    {"help",       no_argument,       nullptr, 'h'},
+    {"list",       no_argument,       nullptr, 'l'},
+    {"verbose",    no_argument,       nullptr, 'v'},
+    {"version",    no_argument,       nullptr, DC_OPT_VERSION},
+    {nullptr, 0,                      nullptr, 0}
   };
 
   while ((ch = getopt_long(argc,
@@ -64,6 +65,26 @@ static void parse_opts(int argc, char *const argv[])
 #endif
     switch (ch)
     {
+    case 'b':
+      try
+      {
+        brightness = std::stof(optarg, nullptr);
+      }
+      catch (std::invalid_argument& ex)
+      {
+        std::cerr << _("Invalid brightness value: ") << optarg << "\n";
+        exit(DC_EXIT_ILLEGAL_VALUE);
+      }
+
+      if (brightness < 0 || brightness > 1)
+      {
+        std::cerr << _("Invalid brightness value: ") << optarg << "\n";
+        exit(DC_EXIT_ILLEGAL_VALUE);
+      }
+
+      bflag = true;
+      break;
+
     case 'd':
       int display_num;
 
@@ -94,13 +115,8 @@ static void parse_opts(int argc, char *const argv[])
       lflag = true;
       break;
 
-    case 'm':
-      mflag = true;
-      break;
-
     case 'v':
       vflag = true;
-      break;
       break;
 
     case DC_OPT_VERSION:
@@ -112,6 +128,8 @@ static void parse_opts(int argc, char *const argv[])
       exit(DC_EXIT_UNKNOWN_OPT);
     }
   }
+
+
 }
 
 static void print_version(std::ostream& stream)
@@ -137,6 +155,7 @@ static void usage(std::ostream& stream)
   stream << PACKAGE_NAME << _(" [OPTION] ... path ...\n");
   stream << "\n";
   stream << _("Options:\n");
+  stream << " -b, --brightness=b    " << _("Set brightness to b.\n");
   stream << " -d, --display=n       " << _("Choose display n.\n");
   stream << " -h, --help            " << _("Show this message.\n");
   stream << " -l, --list            " << _("List displays.\n");
@@ -151,6 +170,7 @@ static void usage(std::ostream& stream)
   stream << PACKAGE_NAME << " " << option_string << " path ...\n";
   stream << "\n";
   stream << _("Options:\n");
+  stream << " -b  Set brightness to b.\n";
   stream << " -d  Watch directories only.\n";
   stream << " -h  Show this message.\n";
   stream << " -l  List displays.\n";
