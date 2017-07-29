@@ -11,6 +11,13 @@ Makefile.in
 /ylwrap
 *.o
 
+# IntelliJ IDEA
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dataSources.*
+.idea/dictionaries
+out/*
+
 # Distribution files
 *.tar.gz
 
