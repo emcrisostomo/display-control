@@ -2,27 +2,50 @@
 
 Makefile.in
 /ar-lib
+/cmake-build-debug/
+/display-control
+/display-control-*/
 /mdate-sh
 /py-compile
 /test-driver
 /ylwrap
+*.o
+
+# IntelliJ IDEA
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dataSources.*
+.idea/dictionaries
+out/*
+
+# Distribution files
+*.tar.gz
 
 # http://www.gnu.org/software/autoconf
 
+# GNU Build System
+/Makefile
+/Makefile.in
+/.deps
+/.dirstamp
+/aclocal.m4
 /autom4te.cache
 /autoscan.log
 /autoscan-*.log
-/aclocal.m4
 /compile
-/config.guess
-/config.h.in
-/config.sub
+/config/
+/config.*
 /configure
 /configure.scan
 /depcomp
+/display_control_config.h
+/display_control_config.h.in
 /install-sh
+/libtool
 /missing
 /stamp-h1
+/src/.deps
+/src/.dirstamp
 
 # https://www.gnu.org/software/libtool/
 
@@ -31,3 +54,67 @@ Makefile.in
 # http://www.gnu.org/software/texinfo
 
 /texinfo.tex
+
+# libtool
+/m4/libtool.m4
+/m4/ltoptions.m4
+/m4/ltsugar.m4
+/m4/ltversion.m4
+/m4/lt~obsolete.m4
+*.la
+
+# gettext
+/ABOUT-NLS
+/m4/gettext.m4
+/m4/iconv.m4
+/m4/lib-ld.m4
+/m4/lib-link.m4
+/m4/lib-prefix.m4
+/m4/nls.m4
+/m4/po.m4
+/m4/progtest.m4
+/po/Makefile
+/po/Makefile.in.in
+/po/Makevars.template
+/po/Rules-quot
+/po/boldquot.sed
+/po/en@boldquot.header
+/po/en@quot.header
+/po/insert-header.sin
+/po/quot.sed
+/po/remove-potcdate.sin
+/po/stamp-po
+/po/*.insert-header
+/po/remove-potcdate.sed
+POTFILES
+
+# M4 macros required by gettext and added by autopoint
+/m4/codeset.m4
+/m4/extern-inline.m4
+/m4/fcntl-o.m4
+/m4/glibc2.m4
+/m4/glibc21.m4
+/m4/intdiv0.m4
+/m4/intl.m4
+/m4/intldir.m4
+/m4/intlmacosx.m4
+/m4/intmax.m4
+/m4/inttypes-pri.m4
+/m4/inttypes_h.m4
+/m4/lcmessage.m4
+/m4/lock.m4
+/m4/longlong.m4
+/m4/printf-posix.m4
+/m4/size_max.m4
+/m4/stdint_h.m4
+/m4/threadlib.m4
+/m4/uintmax_t.m4
+/m4/visibility.m4
+/m4/wchar_t.m4
+/m4/wint_t.m4
+/m4/xsize.m4
+
+# Automatically generated PO and GMO files
+/po/en@boldquot.po
+/po/en@quot.po
+/po/*.gmo
