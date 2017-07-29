@@ -42,7 +42,7 @@ static float brightness = 0.0;
 static void parse_opts(int argc, char *const argv[])
 {
   int ch;
-  std::string short_options = "b:d:lv";
+  std::string short_options = "b:d:hlv";
 
 #ifdef HAVE_GETOPT_LONG
   int option_index = 0;
@@ -129,7 +129,6 @@ static void parse_opts(int argc, char *const argv[])
       exit(DC_EXIT_OK);
 
     case '?':
-      usage(std::cerr);
       exit(DC_EXIT_UNKNOWN_OPT);
     }
   }
