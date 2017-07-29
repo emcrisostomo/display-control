@@ -12,5 +12,5 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-m4_define([DISPLAY_CONTROL_VERSION], [1.0.0])
+m4_define([DISPLAY_CONTROL_VERSION], [1.1.0-develop])
 m4_define([DISPLAY_CONTROL_REVISION], [1])
