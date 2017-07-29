@@ -136,13 +136,30 @@ namespace emc
     if (ret != kIOReturnSuccess)
     {
       std::ostringstream oss;
-      oss << _("IODisplayGetFloatParameter returned error: ");
-      oss << ret;
+      oss << _("IODisplayGetFloatParameter returned error: ") << ret;
 
       throw std::runtime_error(oss.str());
     }
 
     return current_brightness;
+  }
+
+  void display::set_brightness(float brightness)
+  {
+    io_service_t service = find_io_service(this->display_id);
+
+    IOReturn ret = IODisplaySetFloatParameter(service,
+                                              kNilOptions,
+                                              CFSTR(kIODisplayBrightnessKey),
+                                              brightness);
+
+    if (ret != kIOReturnSuccess)
+    {
+      std::ostringstream oss;
+      oss << _("IODisplaySetFloatParameter returned error: ") << ret;
+
+      throw std::runtime_error(oss.str());
+    }
   }
 
   io_service_t find_io_service(CGDirectDisplayID display_id)

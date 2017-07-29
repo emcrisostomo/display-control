@@ -36,6 +36,7 @@ namespace emc
     bool is_opengl_used() const;
     bool is_mirrored() const;
     float get_brightness() const;
+    void set_brightness(float brightness);
 
   private:
     display(CGDirectDisplayID display_id);
