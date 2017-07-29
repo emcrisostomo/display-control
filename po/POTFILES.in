@@ -17,4 +17,3 @@
 #
 src/display-control.cpp
 src/display.cpp
-src/CFTypeGuard.cpp
