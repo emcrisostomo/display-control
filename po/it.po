@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: display-control 1.0.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2017-07-29 00:41+0200\n"
+"POT-Creation-Date: 2017-07-29 03:27+0200\n"
 "PO-Revision-Date: 2017-07-28 04:33+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/display-control.cpp:77 src/display-control.cpp:83
+#: src/display-control.cpp:78 src/display-control.cpp:84
 msgid "Invalid brightness value: "
 msgstr ""
 
-#: src/display-control.cpp:100 src/display-control.cpp:106
+#: src/display-control.cpp:101 src/display-control.cpp:107
 msgid "Invalid display number: "
 msgstr ""
 
@@ -29,95 +29,99 @@ msgstr ""
 msgid "Invalid number of arguments."
 msgstr ""
 
-#: src/display-control.cpp:154
-msgid "No commands specified."
-msgstr ""
-
-#: src/display-control.cpp:161
+#: src/display-control.cpp:162
 msgid "Only one command can be specified."
 msgstr ""
 
-#: src/display-control.cpp:171
+#: src/display-control.cpp:172
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
 "html>.\n"
 msgstr ""
 
-#: src/display-control.cpp:172
+#: src/display-control.cpp:173
 msgid "This is free software: you are free to change and redistribute it.\n"
 msgstr ""
 
-#: src/display-control.cpp:173
+#: src/display-control.cpp:174
 msgid "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
 
-#: src/display-control.cpp:175
+#: src/display-control.cpp:176
 msgid "Written by Enrico M. Crisostomo."
 msgstr ""
 
-#: src/display-control.cpp:185 src/display-control.cpp:200
+#: src/display-control.cpp:186 src/display-control.cpp:201
 msgid "Usage:\n"
 msgstr ""
 
-#: src/display-control.cpp:186
+#: src/display-control.cpp:187
 msgid " [OPTION] ... path ...\n"
 msgstr ""
 
-#: src/display-control.cpp:188 src/display-control.cpp:203
+#: src/display-control.cpp:189 src/display-control.cpp:204
 msgid "Options:\n"
 msgstr ""
 
-#: src/display-control.cpp:189
+#: src/display-control.cpp:190
 msgid "Set brightness to b.\n"
 msgstr ""
 
-#: src/display-control.cpp:190
+#: src/display-control.cpp:191
 msgid "Choose display n.\n"
 msgstr ""
 
-#: src/display-control.cpp:191
+#: src/display-control.cpp:192
 msgid "Show this message.\n"
 msgstr ""
 
-#: src/display-control.cpp:192
+#: src/display-control.cpp:193
 msgid "List displays.\n"
 msgstr ""
 
-#: src/display-control.cpp:193
+#: src/display-control.cpp:194
 msgid "Print verbose output.\n"
 msgstr ""
 
-#: src/display-control.cpp:194
+#: src/display-control.cpp:195
 msgid "Print the version of "
 msgstr ""
 
-#: src/display-control.cpp:194
+#: src/display-control.cpp:195
 msgid " and exit.\n"
 msgstr ""
 
-#: src/display-control.cpp:212
+#: src/display-control.cpp:213
 msgid ""
 "\n"
 "See the man page for more information.\n"
 "\n"
 msgstr ""
 
-#: src/display-control.cpp:214
+#: src/display-control.cpp:215
 msgid "Report bugs to <"
 msgstr ""
 
-#: src/display-control.cpp:215
+#: src/display-control.cpp:216
 msgid " home page: <"
 msgstr ""
 
-#: src/display-control.cpp:237
+#: src/display-control.cpp:239 src/display-control.cpp:266
 msgid "An error occurred: "
 msgstr ""
 
-#: src/display.cpp:42
+#: src/display-control.cpp:289
+msgid "n/a"
+msgstr ""
+
+#: src/display.cpp:41
 msgid "CGGetOnlineDisplayList returned error: "
 msgstr ""
 
-#: src/display.cpp:139
+#: src/display.cpp:138
 msgid "IODisplayGetFloatParameter returned error: "
+msgstr ""
+
+#: src/display.cpp:158
+msgid "IODisplaySetFloatParameter returned error: "
 msgstr ""

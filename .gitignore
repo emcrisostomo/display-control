@@ -2,12 +2,21 @@
 
 Makefile.in
 /ar-lib
+/cmake-build-debug/
 /display-control
 /display-control-*/
 /mdate-sh
 /py-compile
 /test-driver
 /ylwrap
+*.o
+
+# IntelliJ IDEA
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dataSources.*
+.idea/dictionaries
+out/*
 
 # Distribution files
 *.tar.gz
@@ -35,6 +44,8 @@ Makefile.in
 /libtool
 /missing
 /stamp-h1
+/src/.deps
+/src/.dirstamp
 
 # https://www.gnu.org/software/libtool/
 

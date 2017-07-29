@@ -41,6 +41,7 @@ display_control_LDADD = @LTLIBINTL@
 dist_doc_DATA  = README.codestyle
 dist_doc_DATA += README.gnu-build-system
 dist_doc_DATA += README.md
+dist_doc_DATA += README.osx
 dist_doc_DATA += ABOUT-NLS AUTHORS CONTRIBUTING.md COPYING LICENSE NEWS
 
 dist-hook:

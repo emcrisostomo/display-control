@@ -1,2 +1,6 @@
 NEWS
 ****
+
+  * Initial version.
+  * List displays and their current brightness value.
+  * Update the brightness value of a list of displays.
