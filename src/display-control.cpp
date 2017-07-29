@@ -29,13 +29,14 @@
 static void print_version(std::ostream& stream);
 static void usage(std::ostream& stream);
 static bool check_command();
+static void list_displays();
+static int set_brightness();
 
-void list_displays();
 static unsigned int command_counter = 0;
 static bool bflag = false;
 static bool lflag = false;
 static bool vflag = false;
-static std::vector<int> displays;
+static std::vector<unsigned int> displays;
 static float brightness = 0.0;
 
 static void parse_opts(int argc, char *const argv[])
@@ -144,6 +145,8 @@ static void parse_opts(int argc, char *const argv[])
     std::cerr << _("Invalid number of arguments.") << "\n";
     exit(DC_EXIT_UNKNOWN_OPT);
   }
+
+  if (displays.empty()) displays.push_back(0);
 }
 
 static bool check_command()
@@ -201,7 +204,7 @@ static void usage(std::ostream& stream)
   stream << "\n";
   stream << _("Options:\n");
   stream << " -b  Set brightness to b.\n";
-  stream << " -d  Watch directories only.\n";
+  stream << " -d  Choose display d.\n";
   stream << " -h  Show this message.\n";
   stream << " -l  List displays.\n";
   stream << " -v  Print verbose output.\n";
@@ -229,13 +232,43 @@ int main(int argc, char *const argv[])
 
   try
   {
+    if (bflag) return set_brightness();
     if (lflag) list_displays();
   }
   catch (std::exception& ex)
   {
     std::cerr << _("An error occurred: ") << ex.what() << "\n";
   }
+
   return DC_EXIT_OK;
+}
+
+int set_brightness()
+{
+  std::vector<emc::display> active_displays = emc::display::find_active();
+
+  int ret = DC_EXIT_OK;
+
+  for (auto& d : displays)
+  {
+    if (d >= active_displays.size())
+    {
+      std::cerr << "Invalid display " << d << "\n";
+      ret = DC_EXIT_UNKNOWN_DISPLAY;
+      continue;
+    }
+
+    try
+    {
+      active_displays[d].set_brightness(brightness);
+    }
+    catch (std::runtime_error& ex)
+    {
+      std::cerr << _("An error occurred: ") << ex.what() << "\n";
+    }
+  }
+
+  return ret;
 }
 
 void list_displays()
