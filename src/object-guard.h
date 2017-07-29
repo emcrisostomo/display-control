@@ -27,9 +27,17 @@ namespace emc
     {
     }
 
+    object_guard(const object_guard&) = delete;
+    object_guard& operator=(const object_guard&) = delete;
+
     virtual ~object_guard()
     {
       resource_releaser(handle);
+    }
+
+    operator T() const
+    {
+      return handle;
     }
 
   private:
