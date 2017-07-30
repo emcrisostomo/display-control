@@ -6,8 +6,8 @@ project(display_control)
 
 set(CMAKE_CXX_STANDARD 11)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake_config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/cmake_config.h)
-add_definitions(-DHAVE_CONFIG_H)
-add_definitions(-DHAVE_CMAKE_CONFIG_H)
+check_include_files(display_control_config.h HAVE_CONFIG_H)
+check_include_files(cmake_config.h HAVE_CMAKE_CONFIG_H)
 
 set(SOURCE_FILES
         src/display-control.cpp
