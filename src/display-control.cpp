@@ -15,7 +15,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include "../display_control_config.h"
+#  include "display_control_config.h"
 #endif
 #ifdef HAVE_CMAKE_CONFIG_H
 #  include "../cmake_config.h"
