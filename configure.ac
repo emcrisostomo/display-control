@@ -46,6 +46,7 @@ AM_PROG_AR
 # Configure language.
 AC_LANG(C++)
 AC_PROG_CXX([clang++ g++])
+AC_PROG_INSTALL
 
 # Initialize gettext.
 AM_GNU_GETTEXT([external])
