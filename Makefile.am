@@ -34,6 +34,8 @@ display_control_SOURCES += src/object-guard.h
 display_control_LDFLAGS  = -framework IOKit
 display_control_LDFLAGS += -framework ApplicationServices
 
+# Prepare gettext-related symbols used by programs
+AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
 # Link against libintl if gettext is being used
 display_control_LDADD = @LTLIBINTL@
 
