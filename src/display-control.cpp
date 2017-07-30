@@ -14,7 +14,12 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "../display_control_config.h"
+#ifdef HAVE_CONFIG_H
+#  include "../display_control_config.h"
+#endif
+#ifdef HAVE_CMAKE_CONFIG_H
+#  include "../cmake_config.h"
+#endif
 #include "display-control.h"
 #include "gettext_defs.h"
 #ifdef HAVE_GETOPT_LONG

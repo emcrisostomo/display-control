@@ -1,0 +1,2 @@
+#cmakedefine HAVE_GETOPT_H
+#cmakedefine HAVE_GETOPT_LONG
