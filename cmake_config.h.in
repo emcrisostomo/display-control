@@ -1,6 +1,7 @@
 #cmakedefine HAVE_CONFIG_H
 #cmakedefine HAVE_GETOPT_H
 #cmakedefine HAVE_GETOPT_LONG
+#cmakedefine ENABLE_NLS   @ENABLE_NLS@
 #define PACKAGE           "@PACKAGE@"
 #define PACKAGE_NAME      "@PACKAGE_NAME@"
 #define PACKAGE_VERSION   "@PACKAGE_VERSION@"
