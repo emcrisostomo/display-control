@@ -18,7 +18,7 @@
 #  include "display_control_config.h"
 #endif
 #ifdef HAVE_CMAKE_CONFIG_H
-#  include "../cmake_config.h"
+#  include "cmake_config.h"
 #endif
 #include "display-control.h"
 #include "gettext_defs.h"
@@ -200,7 +200,7 @@ static void usage(std::ostream& stream)
   stream << "     --version         " << _("Print the version of ") << PACKAGE_NAME << _(" and exit.\n");
   stream << "\n";
 #else
-  string option_string = "[bdhlv]";
+  std::string option_string = "[bdhlv]";
 
   stream << PACKAGE_STRING << "\n\n";
   stream << _("Usage:\n");
