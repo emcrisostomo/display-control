@@ -8,6 +8,7 @@ set(PACKAGE_STRING    "${PACKAGE_NAME} ${PACKAGE_VERSION}")
 set(PACKAGE_BUGREPORT "enrico.m.crisostomo@gmail.com")
 set(PACKAGE_TARNAME   "${PACKAGE}")
 set(PACKAGE_URL       "https://github.com/emcrisostomo/display-control")
+set(LOCALEDIR         "${CMAKE_INSTALL_PREFIX}/share/locale" CACHE FILEPATH "locale dir")
 
 if (NOT APPLE)
     message(FATAL_ERROR "Unsupported operating system ${CMAKE_HOST_SYSTEM_NAME} ${CMAKE_HOST_SYSTEM_VERSION}")
@@ -32,10 +33,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${Intl_INCLUDE_DIRS}")
 
 add_definitions(-DHAVE_CMAKE_CONFIG_H)
-# FIXME
-add_definitions(-DLOCALEDIR="FIXME")
 check_include_file_cxx(display_control_config.h HAVE_CONFIG_H)
-
 check_include_file_cxx(getopt.h HAVE_GETOPT_H)
 
 if (HAVE_GETOPT_H)
@@ -49,7 +47,6 @@ if (Intl_FOUND)
         target_link_libraries(display_control ${Intl_LIBRARIES})
     endif()
 endif()
-
 
 if (APPLE)
     find_library(IOKIT_LIBRARY IOKit)
@@ -67,3 +64,5 @@ if (APPLE)
 endif (APPLE)
 
 configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
+
+install(TARGETS display_control DESTINATION bin)
