@@ -1,25 +1,26 @@
-# Italian translations for display-control package.
+# Italian translations for display-control package
+# Traduzioni italiane per il pacchetto display-control..
 # Copyright (C) 2017 Enrico M. Crisostomo
 # This file is distributed under the same license as the display-control package.
 # Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: display-control 1.0.0-develop\n"
+"Project-Id-Version: display-control 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
 "POT-Creation-Date: 2017-08-04 21:56+0200\n"
-"PO-Revision-Date: 2017-07-28 04:33+0200\n"
+"PO-Revision-Date: 2017-08-04 22:51+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Italian\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/display-control.cpp:83 src/display-control.cpp:89
 msgid "Invalid brightness value: "
-msgstr ""
+msgstr "Livello di luminosità invalido: "
 
 #: src/display-control.cpp:106 src/display-control.cpp:112
 msgid "Invalid display number: "
