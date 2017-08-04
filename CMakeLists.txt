@@ -66,3 +66,4 @@ endif (APPLE)
 configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
 
 install(TARGETS display_control DESTINATION bin)
+install(FILES ${PROJECT_BINARY_DIR}/cmake_config.h DESTINATION include)
