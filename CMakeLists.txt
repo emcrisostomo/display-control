@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(display_control)
+project(display-control)
 
 set(PACKAGE           "display-control")
 set(PACKAGE_NAME      "${PACKAGE}")
@@ -22,7 +22,7 @@ set(SOURCE_FILES
         src/gettext_defs.h
         src/display.cpp src/display.h
         src/object-guard.h)
-add_executable(display_control ${SOURCE_FILES})
+add_executable(display-control ${SOURCE_FILES})
 
 include(CheckIncludeFileCXX)
 include(CheckSymbolExists)
@@ -33,7 +33,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${Intl_INCLUDE_DIRS}")
 
 add_definitions(-DHAVE_CMAKE_CONFIG_H)
-check_include_file_cxx(display_control_config.h HAVE_CONFIG_H)
+check_include_file_cxx(display-control_config.h HAVE_CONFIG_H)
 check_include_file_cxx(getopt.h HAVE_GETOPT_H)
 
 if (HAVE_GETOPT_H)
@@ -44,7 +44,7 @@ if (Intl_FOUND)
     set(ENABLE_NLS 1)
 
     if (Intl_LIBRARIES)
-        target_link_libraries(display_control ${Intl_LIBRARIES})
+        target_link_libraries(display-control ${Intl_LIBRARIES})
     endif ()
 endif ()
 
@@ -60,7 +60,7 @@ if (APPLE)
         message(FATAL_ERROR "Required library ApplicationServices is missing")
     endif ()
 
-    target_link_libraries(display_control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LIBRARY})
+    target_link_libraries(display-control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LIBRARY})
 endif (APPLE)
 
 configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
@@ -74,5 +74,5 @@ endforeach ()
 
 gettext_process_pot_file(po/display-control.pot ALL INSTALL_DESTINATION share/locale LANGUAGES ${LINGUAS})
 
-install(TARGETS display_control DESTINATION bin)
+install(TARGETS display-control DESTINATION bin)
 install(FILES ${PROJECT_BINARY_DIR}/cmake_config.h DESTINATION include)
