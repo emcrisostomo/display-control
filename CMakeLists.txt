@@ -45,8 +45,8 @@ if (Intl_FOUND)
 
     if (Intl_LIBRARIES)
         target_link_libraries(display_control ${Intl_LIBRARIES})
-    endif()
-endif()
+    endif ()
+endif ()
 
 if (APPLE)
     find_library(IOKIT_LIBRARY IOKit)
@@ -54,16 +54,25 @@ if (APPLE)
 
     if (NOT IOKIT_LIBRARY)
         message(FATAL_ERROR "Required library IOKit is missing")
-    endif()
+    endif ()
 
     if (NOT APPLICATION_SERVICES_LIBRARY)
         message(FATAL_ERROR "Required library ApplicationServices is missing")
-    endif()
+    endif ()
 
     target_link_libraries(display_control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LIBRARY})
 endif (APPLE)
 
 configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
+
+# gettext configuration
+set(LINGUAS en en@quot en@boldquot it es)
+
+foreach (language ${LINGUAS})
+    configure_file(${PROJECT_SOURCE_DIR}/po/${language}.po ${PROJECT_BINARY_DIR}/${language}.po COPYONLY)
+endforeach ()
+
+gettext_process_pot_file(po/display-control.pot ALL INSTALL_DESTINATION share/locale LANGUAGES ${LINGUAS})
 
 install(TARGETS display_control DESTINATION bin)
 install(FILES ${PROJECT_BINARY_DIR}/cmake_config.h DESTINATION include)
