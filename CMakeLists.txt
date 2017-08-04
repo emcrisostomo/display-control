@@ -76,3 +76,11 @@ gettext_process_pot_file(po/display-control.pot ALL INSTALL_DESTINATION share/lo
 
 install(TARGETS display-control DESTINATION bin)
 install(FILES ${PROJECT_BINARY_DIR}/cmake_config.h DESTINATION include)
+
+# tests
+include(CTest)
+
+add_test (displayControlRuns display-control)
+
+add_test(displayControlHelp display-control --help)
+set_tests_properties(displayControlHelp PROPERTIES PASS_REGULAR_EXPRESSION "${PACKAGE} ${PACKAGE_VERSION}")
