@@ -1,17 +1,17 @@
-# Italian translations for display-control package.
+# English translations for display-control package.
 # Copyright (C) 2017 Enrico M. Crisostomo
 # This file is distributed under the same license as the display-control package.
 # Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: display-control 1.0.0-develop\n"
+"Project-Id-Version: display-control 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
 "POT-Creation-Date: 2017-08-04 21:56+0200\n"
-"PO-Revision-Date: 2017-07-28 04:33+0200\n"
+"PO-Revision-Date: 2017-08-04 21:56+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
-"Language-Team: Italian\n"
-"Language: it\n"
+"Language-Team: English\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ASCII\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,77 +19,79 @@ msgstr ""
 
 #: src/display-control.cpp:83 src/display-control.cpp:89
 msgid "Invalid brightness value: "
-msgstr ""
+msgstr "Invalid brightness value: "
 
 #: src/display-control.cpp:106 src/display-control.cpp:112
 msgid "Invalid display number: "
-msgstr ""
+msgstr "Invalid display number: "
 
 #: src/display-control.cpp:149
 msgid "Invalid number of arguments."
-msgstr ""
+msgstr "Invalid number of arguments."
 
 #: src/display-control.cpp:167
 msgid "Only one command can be specified."
-msgstr ""
+msgstr "Only one command can be specified."
 
 #: src/display-control.cpp:177
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
 "html>.\n"
 msgstr ""
+"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
+"html>.\n"
 
 #: src/display-control.cpp:178
 msgid "This is free software: you are free to change and redistribute it.\n"
-msgstr ""
+msgstr "This is free software: you are free to change and redistribute it.\n"
 
 #: src/display-control.cpp:179
 msgid "There is NO WARRANTY, to the extent permitted by law.\n"
-msgstr ""
+msgstr "There is NO WARRANTY, to the extent permitted by law.\n"
 
 #: src/display-control.cpp:181
 msgid "Written by Enrico M. Crisostomo."
-msgstr ""
+msgstr "Written by Enrico M. Crisostomo."
 
 #: src/display-control.cpp:191 src/display-control.cpp:206
 msgid "Usage:\n"
-msgstr ""
+msgstr "Usage:\n"
 
 #: src/display-control.cpp:192
 msgid " [OPTION] ... path ...\n"
-msgstr ""
+msgstr " [OPTION] ... path ...\n"
 
 #: src/display-control.cpp:194 src/display-control.cpp:209
 msgid "Options:\n"
-msgstr ""
+msgstr "Options:\n"
 
 #: src/display-control.cpp:195
 msgid "Set brightness to b.\n"
-msgstr ""
+msgstr "Set brightness to b.\n"
 
 #: src/display-control.cpp:196
 msgid "Choose display n.\n"
-msgstr ""
+msgstr "Choose display n.\n"
 
 #: src/display-control.cpp:197
 msgid "Show this message.\n"
-msgstr ""
+msgstr "Show this message.\n"
 
 #: src/display-control.cpp:198
 msgid "List displays.\n"
-msgstr ""
+msgstr "List displays.\n"
 
 #: src/display-control.cpp:199
 msgid "Print verbose output.\n"
-msgstr ""
+msgstr "Print verbose output.\n"
 
 #: src/display-control.cpp:200
 msgid "Print the version of "
-msgstr ""
+msgstr "Print the version of "
 
 #: src/display-control.cpp:200
 msgid " and exit.\n"
-msgstr ""
+msgstr " and exit.\n"
 
 #: src/display-control.cpp:218
 msgid ""
@@ -97,31 +99,34 @@ msgid ""
 "See the man page for more information.\n"
 "\n"
 msgstr ""
+"\n"
+"See the man page for more information.\n"
+"\n"
 
 #: src/display-control.cpp:220
 msgid "Report bugs to <"
-msgstr ""
+msgstr "Report bugs to <"
 
 #: src/display-control.cpp:221
 msgid " home page: <"
-msgstr ""
+msgstr " home page: <"
 
 #: src/display-control.cpp:244 src/display-control.cpp:271
 msgid "An error occurred: "
-msgstr ""
+msgstr "An error occurred: "
 
 #: src/display-control.cpp:294
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 #: src/display.cpp:41
 msgid "CGGetOnlineDisplayList returned error: "
-msgstr ""
+msgstr "CGGetOnlineDisplayList returned error: "
 
 #: src/display.cpp:138
 msgid "IODisplayGetFloatParameter returned error: "
-msgstr ""
+msgstr "IODisplayGetFloatParameter returned error: "
 
 #: src/display.cpp:158
 msgid "IODisplaySetFloatParameter returned error: "
-msgstr ""
+msgstr "IODisplaySetFloatParameter returned error: "
