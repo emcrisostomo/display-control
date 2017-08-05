@@ -93,3 +93,10 @@ add_test(displayControlRuns display-control)
 
 add_test(displayControlHelp display-control --help)
 set_tests_properties(displayControlHelp PROPERTIES PASS_REGULAR_EXPRESSION "${PACKAGE} ${PACKAGE_VERSION}")
+
+# installer
+include (InstallRequiredSystemLibraries)
+set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set (CPACK_PACKAGE_VERSION_MAJOR "1")
+set (CPACK_PACKAGE_VERSION_MINOR "1")
+include (CPack)
