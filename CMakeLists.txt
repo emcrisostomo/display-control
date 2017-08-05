@@ -44,14 +44,29 @@ if (HAVE_GETOPT_H)
     check_symbol_exists(getopt_long getopt.h HAVE_GETOPT_LONG)
 endif (HAVE_GETOPT_H)
 
-if (Intl_FOUND)
+# gettext and intl
+if (Intl_FOUND AND GETTEXT_FOUND)
+    option(USE_NLS "Use NLS" ON)
+endif ()
+
+if (USE_NLS)
     set(ENABLE_NLS 1)
 
     if (Intl_LIBRARIES)
         target_link_libraries(display-control ${Intl_LIBRARIES})
     endif ()
+
+    # gettext configuration
+    set(LINGUAS en en@quot en@boldquot it es)
+
+    foreach (language ${LINGUAS})
+        configure_file(${PROJECT_SOURCE_DIR}/po/${language}.po ${PROJECT_BINARY_DIR}/${language}.po COPYONLY)
+    endforeach ()
+
+    gettext_process_pot_file(po/display-control.pot ALL INSTALL_DESTINATION share/locale LANGUAGES ${LINGUAS})
 endif ()
 
+# check for required frameworks
 find_library(IOKIT_LIBRARY IOKit)
 find_library(APPLICATION_SERVICES_LIBRARY ApplicationServices)
 
@@ -67,15 +82,7 @@ target_link_libraries(display-control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LI
 
 configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
 
-# gettext configuration
-set(LINGUAS en en@quot en@boldquot it es)
-
-foreach (language ${LINGUAS})
-    configure_file(${PROJECT_SOURCE_DIR}/po/${language}.po ${PROJECT_BINARY_DIR}/${language}.po COPYONLY)
-endforeach ()
-
-gettext_process_pot_file(po/display-control.pot ALL INSTALL_DESTINATION share/locale LANGUAGES ${LINGUAS})
-
+# install targets
 install(TARGETS display-control DESTINATION bin)
 install(FILES ${PROJECT_BINARY_DIR}/cmake_config.h DESTINATION include)
 
