@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 project(display-control)
 
+#@formatter:off
 set(PACKAGE           "display-control")
 set(PACKAGE_NAME      "${PACKAGE}")
 set(PACKAGE_VERSION   "1.1.0-develop")
@@ -9,6 +10,7 @@ set(PACKAGE_BUGREPORT "enrico.m.crisostomo@gmail.com")
 set(PACKAGE_TARNAME   "${PACKAGE}")
 set(PACKAGE_URL       "https://github.com/emcrisostomo/display-control")
 set(LOCALEDIR         "${CMAKE_INSTALL_PREFIX}/share/locale" CACHE FILEPATH "locale dir")
+#@formatter:on
 
 if (NOT APPLE)
     message(FATAL_ERROR "Unsupported operating system ${CMAKE_HOST_SYSTEM_NAME} ${CMAKE_HOST_SYSTEM_VERSION}")
@@ -34,6 +36,8 @@ include_directories("${Intl_INCLUDE_DIRS}")
 
 add_definitions(-DHAVE_CMAKE_CONFIG_H)
 check_include_file_cxx(display-control_config.h HAVE_CONFIG_H)
+
+# platform checks
 check_include_file_cxx(getopt.h HAVE_GETOPT_H)
 
 if (HAVE_GETOPT_H)
@@ -48,20 +52,18 @@ if (Intl_FOUND)
     endif ()
 endif ()
 
-if (APPLE)
-    find_library(IOKIT_LIBRARY IOKit)
-    find_library(APPLICATION_SERVICES_LIBRARY ApplicationServices)
+find_library(IOKIT_LIBRARY IOKit)
+find_library(APPLICATION_SERVICES_LIBRARY ApplicationServices)
 
-    if (NOT IOKIT_LIBRARY)
-        message(FATAL_ERROR "Required library IOKit is missing")
-    endif ()
+if (NOT IOKIT_LIBRARY)
+    message(FATAL_ERROR "Required library IOKit is missing")
+endif ()
 
-    if (NOT APPLICATION_SERVICES_LIBRARY)
-        message(FATAL_ERROR "Required library ApplicationServices is missing")
-    endif ()
+if (NOT APPLICATION_SERVICES_LIBRARY)
+    message(FATAL_ERROR "Required library ApplicationServices is missing")
+endif ()
 
-    target_link_libraries(display-control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LIBRARY})
-endif (APPLE)
+target_link_libraries(display-control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LIBRARY})
 
 configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
 
@@ -80,7 +82,7 @@ install(FILES ${PROJECT_BINARY_DIR}/cmake_config.h DESTINATION include)
 # tests
 include(CTest)
 
-add_test (displayControlRuns display-control)
+add_test(displayControlRuns display-control)
 
 add_test(displayControlHelp display-control --help)
 set_tests_properties(displayControlHelp PROPERTIES PASS_REGULAR_EXPRESSION "${PACKAGE} ${PACKAGE_VERSION}")
