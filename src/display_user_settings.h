@@ -23,11 +23,16 @@ namespace emc
   {
   public:
     static display_user_settings load();
+    display_user_settings(display_user_settings&& other) noexcept = default;
+    display_user_settings& operator=(display_user_settings&& other) noexcept = default;
     void clear();
     void set_display_brightness(unsigned int display, float brightness);
     float get_display_brightness(unsigned int display) const;
+    void save();
   private:
     display_user_settings();
+    display_user_settings(const display_user_settings&) = delete;
+    display_user_settings& operator=(const display_user_settings&) = delete;
   };
 }
 
