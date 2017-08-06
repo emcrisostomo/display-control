@@ -54,7 +54,7 @@ namespace emc
 
       CGDisplayModeRelease(mode);
 
-      active_displays.push_back(emc::display(display_id));
+      active_displays.emplace_back(emc::display(display_id));
     }
 
     return active_displays;
