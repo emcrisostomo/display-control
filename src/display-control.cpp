@@ -34,7 +34,7 @@
 static void print_version(std::ostream& stream);
 static void usage(std::ostream& stream);
 static bool check_command();
-static void list_displays();
+static int list_displays();
 static int set_brightness();
 
 static unsigned int command_counter = 0;
@@ -237,14 +237,15 @@ int main(int argc, char *const argv[])
   try
   {
     if (bflag) return set_brightness();
-    if (lflag) list_displays();
+    if (lflag) return list_displays();
   }
   catch (std::exception& ex)
   {
     std::cerr << _("An error occurred: ") << ex.what() << "\n";
   }
 
-  return DC_EXIT_OK;
+  std::cerr << _("No operation was performed.\n This is probably a bug.\n");
+  return DC_EXIT_ILLEGAL_COMMAND;
 }
 
 int set_brightness()
@@ -275,25 +276,32 @@ int set_brightness()
   return ret;
 }
 
-void list_displays()
+int list_displays()
 {
   std::vector<emc::display> active_displays = emc::display::find_active();
 
-  unsigned int i = 0;
+  int ret = DC_EXIT_OK;
 
-  for (const auto& d : active_displays)
+  for (auto& d : displays)
   {
+    if (d >= active_displays.size())
+    {
+      std::cerr << "Invalid display " << d << "\n";
+      ret = DC_EXIT_UNKNOWN_DISPLAY;
+      continue;
+    }
+
     try
     {
-      float current_brightness = d.get_brightness();
+      float current_brightness = active_displays[d].get_brightness();
 
-      std::cout << i << ":" << current_brightness << "\n";
+      std::cout << d << ":" << current_brightness << "\n";
     }
     catch (std::runtime_error& ex)
     {
-      std::cout << i << ":" << _("n/a") << "\n";
+      std::cout << d << ":" << _("n/a") << "\n";
     }
-
-    ++i;
   }
+
+  return ret;
 }
