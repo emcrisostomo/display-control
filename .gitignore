@@ -78,8 +78,6 @@ out/*
 /po/Makevars.template
 /po/Rules-quot
 /po/boldquot.sed
-/po/en@boldquot.header
-/po/en@quot.header
 /po/insert-header.sin
 /po/quot.sed
 /po/remove-potcdate.sin
@@ -115,6 +113,4 @@ POTFILES
 /m4/xsize.m4
 
 # Automatically generated PO and GMO files
-/po/en@boldquot.po
-/po/en@quot.po
 /po/*.gmo
