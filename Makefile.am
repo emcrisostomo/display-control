@@ -29,6 +29,7 @@ display_control_SOURCES  = src/display-control.cpp src/display-control.h
 display_control_SOURCES += src/gettext.h
 display_control_SOURCES += src/gettext_defs.h
 display_control_SOURCES += src/display.cpp src/display.h
+display_control_SOURCES += src/display_user_settings.cpp src/display_user_settings.h
 display_control_SOURCES += src/object_guard.h
 
 display_control_LDFLAGS  = -framework IOKit

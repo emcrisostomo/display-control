@@ -25,7 +25,8 @@ set(SOURCE_FILES
         src/gettext.h
         src/gettext_defs.h
         src/display.cpp src/display.h
-        src/object_guard.h)
+        src/object_guard.h
+        src/display_user_settings.cpp src/display_user_settings.h)
 add_executable(display-control ${SOURCE_FILES})
 
 include(CheckIncludeFileCXX)
