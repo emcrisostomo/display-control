@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 3.8)
-project(display-control)
+# Add DESCRIPTION when migrating to CMake 3.9
+project(display-control VERSION 1.1.0)
 
 #@formatter:off
 set(PACKAGE           "display-control")
 set(PACKAGE_NAME      "${PACKAGE}")
-set(PACKAGE_VERSION   "1.1.0-develop")
+set(PACKAGE_VERSION   "${PROJECT_VERSION}-develop")
 set(PACKAGE_STRING    "${PACKAGE_NAME} ${PACKAGE_VERSION}")
-set(PACKAGE_BUGREPORT "enrico.m.crisostomo@gmail.com")
+set(PACKAGE_AUTHOR    "enrico.m.crisostomo@gmail.com")
+set(PACKAGE_BUGREPORT "${PACKAGE_AUTHOR}")
 set(PACKAGE_TARNAME   "${PACKAGE}")
 set(PACKAGE_URL       "https://github.com/emcrisostomo/display-control")
 set(LOCALEDIR         "${CMAKE_INSTALL_PREFIX}/share/locale" CACHE FILEPATH "locale dir")
@@ -95,8 +97,15 @@ add_test(displayControlHelp display-control --help)
 set_tests_properties(displayControlHelp PROPERTIES PASS_REGULAR_EXPRESSION "${PACKAGE} ${PACKAGE_VERSION}")
 
 # installer
-include (InstallRequiredSystemLibraries)
-set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
-set (CPACK_PACKAGE_VERSION_MAJOR "1")
-set (CPACK_PACKAGE_VERSION_MINOR "1")
-include (CPack)
+include(InstallRequiredSystemLibraries)
+#@formatter:off
+# Remove and default to project description when migrated to CMake 3.9
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A macOS utility to enumerate displays and store and set their brightness level")
+set(CPACK_PACKAGE_VERSION_MAJOR       "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR       "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH       "${PROJECT_VERSION_PATCH}")
+set(CPACK_PACKAGE_VENDOR              "PACKAGE_AUTHOR")
+set(CPACK_RESOURCE_FILE_LICENSE       "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_GENERATOR                   "STGZ;TGZ")
+#@formatter:on
+include(CPack)
