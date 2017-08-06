@@ -18,7 +18,7 @@
 #include <system_error>
 #include <sstream>
 #include "gettext_defs.h"
-#include "object-guard.h"
+#include "object_guard.h"
 #include <IOKit/graphics/IOGraphicsLib.h>
 
 namespace emc
