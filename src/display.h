@@ -26,6 +26,8 @@ namespace emc
   {
   public:
     static std::vector<display> find_active();
+    display(display&& other) noexcept = default;
+    display& operator=(display&& other) noexcept = default;
     bool is_active() const;
     bool is_asleep() const;
     bool is_builtin() const;
@@ -40,6 +42,8 @@ namespace emc
 
   private:
     display(CGDirectDisplayID display_id);
+    display(const display&) = delete;
+    display& operator=(const display&) = delete;
 
     CGDirectDisplayID display_id;
     static const int DC_MAX_DISPLAYS = 128;
