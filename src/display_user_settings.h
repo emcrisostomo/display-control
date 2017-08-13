@@ -17,6 +17,8 @@
 #ifndef DISPLAY_CONTROL_DISPLAY_USER_SETTINGS_H
 #define DISPLAY_CONTROL_DISPLAY_USER_SETTINGS_H
 
+#include <memory>
+
 namespace emc
 {
   class display_user_settings
@@ -25,14 +27,17 @@ namespace emc
     static display_user_settings load();
     display_user_settings(display_user_settings&& other) noexcept = default;
     display_user_settings& operator=(display_user_settings&& other) noexcept = default;
+    display_user_settings(const display_user_settings&) = delete;
+    display_user_settings& operator=(const display_user_settings&) = delete;
+    ~display_user_settings();
     void clear();
     void set_display_brightness(unsigned int display, float brightness);
     float get_display_brightness(unsigned int display) const;
     void save();
   private:
+    struct impl;
+    std::unique_ptr<impl> pimpl;
     display_user_settings();
-    display_user_settings(const display_user_settings&) = delete;
-    display_user_settings& operator=(const display_user_settings&) = delete;
   };
 }
 

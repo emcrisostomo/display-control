@@ -22,11 +22,17 @@
 #include <cstdlib>
 #include <pwd.h>
 #include <stdexcept>
+#include <fstream>
 #include "gettext_defs.h"
+#include "cmake_config.h"
 
 namespace emc
 {
   static std::string get_data_home_dir();
+
+  struct display_user_settings::impl
+  {
+  };
 
   std::string get_data_home_dir()
   {
@@ -36,7 +42,7 @@ namespace emc
     const char *home = getenv("HOME");
     if (home != nullptr) return home;
 
-    struct passwd pwd {};
+    struct passwd pwd{};
     struct passwd *result;
 
     long buffer_size = sysconf(_SC_GETPW_R_SIZE_MAX);
@@ -62,6 +68,16 @@ namespace emc
   {
     // FIXME: implement
     std::string home = get_data_home_dir();
+    std::string config_file_path = home + "/" + PACKAGE + "/displays";
+    std::ifstream f(config_file_path);
+
+    if (!f.is_open()) return {};
+
+    std::string line;
+    while (std::getline(f, line))
+    {
+//      parse_settings(line);
+    }
 
     display_user_settings settings;
 
@@ -89,6 +105,11 @@ namespace emc
   }
 
   void display_user_settings::save()
+  {
+
+  }
+
+  display_user_settings::~display_user_settings()
   {
 
   }
