@@ -20,19 +20,20 @@
 #include <cstring>
 #include <unistd.h>
 #include <cstdlib>
+#include <cstdio>
 #include <pwd.h>
 #include <stdexcept>
 #include <fstream>
+#include <regex>
 #include "gettext_defs.h"
 #include "cmake_config.h"
 
 namespace emc
 {
   static std::string get_data_home_dir();
-
-  struct display_user_settings::impl
-  {
-  };
+  static bool parse_settings(std::string settings,
+                             std::pair<unsigned int, float>& pair,
+                             void (*err_handler)(std::string));
 
   std::string get_data_home_dir()
   {
@@ -40,7 +41,7 @@ namespace emc
     if (xdg_data_home != nullptr) return xdg_data_home;
 
     const char *home = getenv("HOME");
-    if (home != nullptr) return home;
+    if (home != nullptr) return std::string(home) + "/.local/share";;
 
     struct passwd pwd{};
     struct passwd *result;
@@ -64,6 +65,44 @@ namespace emc
     return std::string(result->pw_dir) + "/.local/share";
   }
 
+  bool parse_settings(std::string settings, std::pair<unsigned int, float>& pair, void (*err_handler)(std::string))
+  {
+#define handle_error(t) if (err_handler) err_handler(t);
+    // Skip empty strings.
+    if (settings.length() == 0) return false;
+
+    // Strip comments.
+    if (settings[0] == '#') return false;
+
+    // Settings have the following structure:
+    // x:b
+    // where:
+    //   * x is the display index (x >= 0)
+    //   * b is the display brightness (0 <= b <= 1)
+    static std::regex filter_grammar(R"(^(\d+):(\d*\.?\d*) *$)", std::regex_constants::ECMAScript);
+    std::smatch fragments;
+
+    if (!regex_match(settings, fragments, filter_grammar))
+    {
+      handle_error(settings);
+      return false;
+    }
+
+    try
+    {
+      unsigned long display_number = std::stoul(fragments[1].str(), nullptr, 10);
+      float display_brightness = std::stof(fragments[2].str(), nullptr);
+
+      pair = std::make_pair(display_number, display_brightness);
+      return true;
+    }
+    catch (std::logic_error& ex)
+    {
+      std::cerr << _("Invalid display settings: ") << fragments[0] << "\n";
+      return false;
+    }
+  }
+
   display_user_settings display_user_settings::load()
   {
     // FIXME: implement
@@ -74,43 +113,57 @@ namespace emc
     if (!f.is_open()) return {};
 
     std::string line;
+    std::pair<unsigned int, float> pair;
+    display_user_settings settings;
+
     while (std::getline(f, line))
     {
-//      parse_settings(line);
+      if (parse_settings(line,
+                         pair,
+                         [](std::string s)
+                         {
+                           std::cerr << _("Invalid display settings: ") << s << "\n";
+                         }))
+      {
+        settings.brightness_settings.insert(pair);
+      }
     }
-
-    display_user_settings settings;
 
     return settings;
   }
 
   void display_user_settings::clear()
   {
-
+    brightness_settings.clear();
   }
 
   void display_user_settings::set_display_brightness(unsigned int display, float brightness)
   {
-
+    brightness_settings[display] = brightness;
   }
 
   float display_user_settings::get_display_brightness(unsigned int display) const
   {
-    return 0;
+    if (!has_configuration(display))
+    {
+      std::string err = _("The specified display index has no settings: ") + std::to_string(display);
+      throw std::out_of_range(err);
+    }
+
+    return brightness_settings.at(display);
   }
 
-  display_user_settings::display_user_settings()
+  bool display_user_settings::has_configuration(unsigned int display) const
   {
-
+    return (brightness_settings.find(display) != brightness_settings.end());
   }
 
   void display_user_settings::save()
   {
-
+    throw std::runtime_error(_("Unimplemented method"));
   }
 
-  display_user_settings::~display_user_settings()
-  {
+  display_user_settings::display_user_settings() = default;
 
-  }
+  display_user_settings::~display_user_settings() = default;
 }
