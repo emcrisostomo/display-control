@@ -44,7 +44,7 @@ static bool bflag = false;
 static bool lflag = false;
 static bool rflag = false;
 static bool vflag = false;
-static std::vector<unsigned int> displays;
+static std::vector<unsigned long> displays;
 static float brightness = 0.0;
 
 static void parse_opts(int argc, char *const argv[])
@@ -99,19 +99,13 @@ static void parse_opts(int argc, char *const argv[])
       break;
 
     case 'd':
-      int display_num;
+      unsigned long display_num;
 
       try
       {
-        display_num = std::stoi(optarg, nullptr, 10);
+        display_num = std::stoul(optarg, nullptr, 10);
       }
       catch (std::invalid_argument& ex)
-      {
-        std::cerr << _("Invalid display number: ") << optarg << "\n";
-        exit(DC_EXIT_ILLEGAL_VALUE);
-      }
-
-      if (display_num < 0)
       {
         std::cerr << _("Invalid display number: ") << optarg << "\n";
         exit(DC_EXIT_ILLEGAL_VALUE);
