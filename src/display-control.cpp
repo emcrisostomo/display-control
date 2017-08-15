@@ -29,17 +29,20 @@
 #include <string>
 #include <vector>
 #include "display.h"
+#include "display_user_settings.h"
 
 #define _(String) gettext(String)
 static void print_version(std::ostream& stream);
 static void usage(std::ostream& stream);
 static bool check_command();
 static int list_displays();
+static int restore_displays();
 static int set_brightness();
 
 static unsigned int command_counter = 0;
 static bool bflag = false;
 static bool lflag = false;
+static bool rflag = false;
 static bool vflag = false;
 static std::vector<unsigned int> displays;
 static float brightness = 0.0;
@@ -47,7 +50,7 @@ static float brightness = 0.0;
 static void parse_opts(int argc, char *const argv[])
 {
   int ch;
-  std::string short_options = "b:d:hlv";
+  std::string short_options = "b:d:hlrv";
 
 #ifdef HAVE_GETOPT_LONG
   int option_index = 0;
@@ -56,6 +59,7 @@ static void parse_opts(int argc, char *const argv[])
     {"display",    required_argument, nullptr, 'd'},
     {"help",       no_argument,       nullptr, 'h'},
     {"list",       no_argument,       nullptr, 'l'},
+    {"restore",    no_argument,       nullptr, 'r'},
     {"verbose",    no_argument,       nullptr, 'v'},
     {"version",    no_argument,       nullptr, DC_OPT_VERSION},
     {nullptr, 0,                      nullptr, 0}
@@ -122,6 +126,11 @@ static void parse_opts(int argc, char *const argv[])
 
     case 'l':
       lflag = true;
+      ++command_counter;
+      break;
+
+    case 'r':
+      rflag = true;
       ++command_counter;
       break;
 
@@ -196,6 +205,7 @@ static void usage(std::ostream& stream)
   stream << " -d, --display=n       " << _("Choose display n.\n");
   stream << " -h, --help            " << _("Show this message.\n");
   stream << " -l, --list            " << _("List displays.\n");
+  stream << " -r, --restore         " << _("Restore display brightness.\n");
   stream << " -v, --verbose         " << _("Print verbose output.\n");
   stream << "     --version         " << _("Print the version of ") << PACKAGE_NAME << _(" and exit.\n");
   stream << "\n";
@@ -238,6 +248,7 @@ int main(int argc, char *const argv[])
   {
     if (bflag) return set_brightness();
     if (lflag) return list_displays();
+    if (rflag) return restore_displays();
   }
   catch (std::exception& ex)
   {
@@ -258,7 +269,7 @@ int set_brightness()
   {
     if (d >= active_displays.size())
     {
-      std::cerr << "Invalid display " << d << "\n";
+      std::cerr << _("Invalid display ") << d << "\n";
       ret = DC_EXIT_UNKNOWN_DISPLAY;
       continue;
     }
@@ -286,7 +297,7 @@ int list_displays()
   {
     if (d >= active_displays.size())
     {
-      std::cerr << "Invalid display " << d << "\n";
+      std::cerr << _("Invalid display ") << d << "\n";
       ret = DC_EXIT_UNKNOWN_DISPLAY;
       continue;
     }
@@ -301,6 +312,34 @@ int list_displays()
     {
       std::cout << d << ":" << _("n/a") << "\n";
     }
+  }
+
+  return ret;
+}
+
+int restore_displays()
+{
+  std::vector<emc::display> active_displays = emc::display::find_active();
+  emc::display_user_settings settings = emc::display_user_settings::load();
+
+  int ret = DC_EXIT_OK;
+
+  for (auto& d : displays)
+  {
+    if (d >= active_displays.size())
+    {
+      std::cerr << _("Invalid display ") << d << "\n";
+      ret = DC_EXIT_UNKNOWN_DISPLAY;
+      continue;
+    }
+
+    if (!settings.has_configuration(d))
+    {
+      std::cerr << _("Display has no configuration: ") << d << "\n";
+      continue;
+    }
+
+    active_displays[d].set_brightness(settings.get_display_brightness(d));
   }
 
   return ret;
