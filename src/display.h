@@ -26,7 +26,11 @@ namespace emc
   {
   public:
     static std::vector<display> find_active();
+
+    display(const display&) = delete;
+    display& operator=(const display&) = delete;
     display(display&& other) noexcept = default;
+
     display& operator=(display&& other) noexcept = default;
     bool is_active() const;
     bool is_asleep() const;
@@ -39,14 +43,11 @@ namespace emc
     bool is_mirrored() const;
     float get_brightness() const;
     void set_brightness(float brightness);
-
   private:
     display(CGDirectDisplayID display_id);
-    display(const display&) = delete;
-    display& operator=(const display&) = delete;
 
-    CGDirectDisplayID display_id;
     static const int DC_MAX_DISPLAYS = 128;
+    CGDirectDisplayID display_id;
     bool active;
     bool asleep;
     bool builtin;
