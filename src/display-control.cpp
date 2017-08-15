@@ -138,6 +138,10 @@ static void parse_opts(int argc, char *const argv[])
 
     case '?':
       exit(DC_EXIT_UNKNOWN_OPT);
+
+    default:
+      std::cerr << _("Unexpected option received: ") << ch << "\n" << _("This is likely a bug.") << "\n";
+      exit(DC_EXIT_UNKNOWN_OPT);
     }
   }
 
