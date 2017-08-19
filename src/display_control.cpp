@@ -20,7 +20,7 @@
 #ifdef HAVE_CMAKE_CONFIG_H
 #  include "cmake_config.h"
 #endif
-#include "display-control.h"
+#include "display_control.h"
 #include "gettext_defs.h"
 #ifdef HAVE_GETOPT_LONG
 #  include <getopt.h>

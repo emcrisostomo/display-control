@@ -25,7 +25,7 @@ libtool: $(LIBTOOL_DEPS)
 
 # binaries
 bin_PROGRAMS = display-control
-display_control_SOURCES  = src/display-control.cpp src/display-control.h
+display_control_SOURCES  = src/display_control.cpp src/display_control.h
 display_control_SOURCES += src/gettext.h
 display_control_SOURCES += src/gettext_defs.h
 display_control_SOURCES += src/display.cpp src/display.h

@@ -20,8 +20,8 @@ endif ()
 
 set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES
-        src/display-control.cpp
-        src/display-control.h
+        src/display_control.cpp
+        src/display_control.h
         src/gettext.h
         src/gettext_defs.h
         src/display.cpp src/display.h
