@@ -105,7 +105,6 @@ namespace emc
 
   display_user_settings display_user_settings::load()
   {
-    // FIXME: implement
     std::string home = get_data_home_dir();
     std::string config_file_path = home + "/" + PACKAGE + "/displays";
     std::ifstream f(config_file_path);
@@ -160,7 +159,11 @@ namespace emc
 
   void display_user_settings::save()
   {
-    throw std::runtime_error(_("Unimplemented method"));
+    std::string home = get_data_home_dir();
+    std::string config_file_path = home + "/" + PACKAGE + "/displays";
+    std::ofstream f(config_file_path, std::ios::trunc);
+
+    for (const auto& p : brightness_settings) f << p.first << ":" << p.second << "eee\n";
   }
 
   display_user_settings::display_user_settings() = default;
