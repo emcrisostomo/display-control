@@ -163,7 +163,7 @@ namespace emc
     std::string config_file_path = home + "/" + PACKAGE + "/displays";
     std::ofstream f(config_file_path, std::ios::trunc);
 
-    for (const auto& p : brightness_settings) f << p.first << ":" << p.second << "eee\n";
+    for (const auto& p : brightness_settings) f << p.first << ":" << p.second << "\n";
   }
 
   display_user_settings::display_user_settings() = default;
