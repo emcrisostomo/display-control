@@ -96,6 +96,15 @@ will be English.
 Usage
 -----
 
+`display-control` has the following main mode of operation:
+
+  * Query mode (`-l`, default mode).
+  * Set mode (`-b`).
+  * Save mode (`-s`)
+  * Restore mode (`-r`)
+
+### Querying the display brightness settings
+
 By default, unless a different operation is specified, `display-control` queries
 the system to get the list of displays and their brightness settings:
 
@@ -108,15 +117,33 @@ One row per display will be returned with this format:
 
 where `i` is the display index and `b` the current brightness value.
 
+### Setting the display brightness settings
+
 The brightness value can be changed using the `-b` option:
 
     $ display-control -b .5
 
-Unless `-d` is used, the brightness settings of the first display will be
-updated.  A list of displays to update can be specified using the `-d` option:
+### Saving the display brightness settings
+
+The display brightness settings can be saved to a configuration file for later
+use using the `-s` option:
+
+    $ display-control -s
+
+### Restoring the display brightness settings
+
+If the display brightness settings were saved in a configuration file, they can
+be restored using the `-r` option:
+
+    $ display-control -r
+
+### Operating on selected displays
+
+Unless `-d` is used, `display-settings` operates on all the displays configured
+in the system.  A list of displays to update can be specified using multiple
+`-d` options:
 
     $ display-control -b .5 -d 0 -d 1
-
 
 Contributing
 ------------
