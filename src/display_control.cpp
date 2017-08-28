@@ -43,6 +43,7 @@ static unsigned int command_counter = 0;
 static bool bflag = false;
 static bool lflag = false;
 static bool rflag = false;
+static bool sflag = false;
 static bool vflag = false;
 static std::vector<unsigned long> displays;
 static float brightness = 0.0;
@@ -50,7 +51,7 @@ static float brightness = 0.0;
 static void parse_opts(int argc, char *const argv[])
 {
   int ch;
-  std::string short_options = "b:d:hlrv";
+  std::string short_options = "b:d:hlrsv";
 
 #ifdef HAVE_GETOPT_LONG
   int option_index = 0;
@@ -60,6 +61,7 @@ static void parse_opts(int argc, char *const argv[])
     {"help",       no_argument,       nullptr, 'h'},
     {"list",       no_argument,       nullptr, 'l'},
     {"restore",    no_argument,       nullptr, 'r'},
+    {"save",       no_argument,       nullptr, 's'},
     {"verbose",    no_argument,       nullptr, 'v'},
     {"version",    no_argument,       nullptr, DC_OPT_VERSION},
     {nullptr, 0,                      nullptr, 0}
@@ -126,6 +128,10 @@ static void parse_opts(int argc, char *const argv[])
     case 'r':
       rflag = true;
       ++command_counter;
+      break;
+
+    case 's':
+      sflag = true;
       break;
 
     case 'v':
@@ -204,6 +210,7 @@ static void usage(std::ostream& stream)
   stream << " -h, --help            " << _("Show this message.\n");
   stream << " -l, --list            " << _("List displays.\n");
   stream << " -r, --restore         " << _("Restore display brightness.\n");
+  stream << " -s, --save            " << _("Save display brightness.\n");
   stream << " -v, --verbose         " << _("Print verbose output.\n");
   stream << "     --version         " << _("Print the version of ") << PACKAGE_NAME << _(" and exit.\n");
   stream << "\n";
@@ -288,6 +295,7 @@ int set_brightness()
 int list_displays()
 {
   std::vector<emc::display> active_displays = emc::display::find_active();
+  emc::display_user_settings settings;
 
   int ret = DC_EXIT_OK;
 
@@ -303,7 +311,7 @@ int list_displays()
     try
     {
       float current_brightness = active_displays[d].get_brightness();
-
+      settings.set_display_brightness(d, current_brightness);
       std::cout << d << ":" << current_brightness << "\n";
     }
     catch (std::runtime_error& ex)
@@ -311,6 +319,8 @@ int list_displays()
       std::cout << d << ":" << _("n/a") << "\n";
     }
   }
+
+  if (sflag) settings.save();
 
   return ret;
 }
