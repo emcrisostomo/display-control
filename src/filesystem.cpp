@@ -45,7 +45,7 @@ bool emc::filesystem::is_dir(const std::string& path)
 
   if (ret == 0)
   {
-    return (info.st_mode & S_IFDIR) != 0 ;
+    return (info.st_mode & S_IFDIR) != 0;
   }
 
   switch (errno)
