@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: display-control 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2017-08-16 02:02+0200\n"
+"POT-Creation-Date: 2017-08-28 11:25+0200\n"
 "PO-Revision-Date: 2017-08-04 22:51+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -18,128 +18,152 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/display-control.cpp:87 src/display-control.cpp:93
+#: src/display_control.cpp:89 src/display_control.cpp:95
 msgid "Invalid brightness value: "
 msgstr "Livello di luminosità invalido: "
 
-#: src/display-control.cpp:110
+#: src/display_control.cpp:112
 msgid "Invalid display number: "
 msgstr ""
 
-#: src/display-control.cpp:143
+#: src/display_control.cpp:149
 msgid "Unexpected option received: "
 msgstr ""
 
-#: src/display-control.cpp:143
+#: src/display_control.cpp:149
 msgid "This is likely a bug."
 msgstr ""
 
-#: src/display-control.cpp:156
+#: src/display_control.cpp:162
 msgid "Invalid number of arguments."
 msgstr ""
 
-#: src/display-control.cpp:174
+#: src/display_control.cpp:180
 msgid "Only one command can be specified."
 msgstr ""
 
-#: src/display-control.cpp:184
+#: src/display_control.cpp:190
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
 "html>.\n"
 msgstr ""
 
-#: src/display-control.cpp:185
+#: src/display_control.cpp:191
 msgid "This is free software: you are free to change and redistribute it.\n"
 msgstr ""
 
-#: src/display-control.cpp:186
+#: src/display_control.cpp:192
 msgid "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
 
-#: src/display-control.cpp:188
+#: src/display_control.cpp:194
 msgid "Written by Enrico M. Crisostomo."
 msgstr ""
 
-#: src/display-control.cpp:198 src/display-control.cpp:214
+#: src/display_control.cpp:204 src/display_control.cpp:221
 msgid "Usage:\n"
 msgstr ""
 
-#: src/display-control.cpp:199
+#: src/display_control.cpp:205
 msgid " [OPTION] ... path ...\n"
 msgstr ""
 
-#: src/display-control.cpp:201 src/display-control.cpp:217
+#: src/display_control.cpp:207 src/display_control.cpp:224
 msgid "Options:\n"
 msgstr ""
 
-#: src/display-control.cpp:202
+#: src/display_control.cpp:208
 msgid "Set brightness to b.\n"
 msgstr ""
 
-#: src/display-control.cpp:203
+#: src/display_control.cpp:209
 msgid "Choose display n.\n"
 msgstr ""
 
-#: src/display-control.cpp:204
+#: src/display_control.cpp:210
 msgid "Show this message.\n"
 msgstr ""
 
-#: src/display-control.cpp:205
+#: src/display_control.cpp:211
 msgid "List displays.\n"
 msgstr ""
 
-#: src/display-control.cpp:206
+#: src/display_control.cpp:212
 msgid "Restore display brightness.\n"
 msgstr ""
 
-#: src/display-control.cpp:207
+#: src/display_control.cpp:213
+msgid "Save display brightness.\n"
+msgstr ""
+
+#: src/display_control.cpp:214
 msgid "Print verbose output.\n"
 msgstr ""
 
-#: src/display-control.cpp:208
+#: src/display_control.cpp:215
 msgid "Print the version of "
 msgstr ""
 
-#: src/display-control.cpp:208
+#: src/display_control.cpp:215
 msgid " and exit.\n"
 msgstr ""
 
-#: src/display-control.cpp:226
+#: src/display_control.cpp:233
 msgid ""
 "\n"
 "See the man page for more information.\n"
 "\n"
 msgstr ""
 
-#: src/display-control.cpp:228
+#: src/display_control.cpp:235
 msgid "Report bugs to <"
 msgstr ""
 
-#: src/display-control.cpp:229
+#: src/display_control.cpp:236
 msgid " home page: <"
 msgstr ""
 
-#: src/display-control.cpp:253 src/display-control.cpp:281
+#: src/display_control.cpp:260 src/display_control.cpp:288
 msgid "An error occurred: "
 msgstr ""
 
-#: src/display-control.cpp:256
+#: src/display_control.cpp:263
 msgid ""
 "No operation was performed.\n"
 " This is probably a bug.\n"
 msgstr ""
 
-#: src/display-control.cpp:270 src/display-control.cpp:298
-#: src/display-control.cpp:329
+#: src/display_control.cpp:277 src/display_control.cpp:306
+#: src/display_control.cpp:339
 msgid "Invalid display "
 msgstr ""
 
-#: src/display-control.cpp:311
+#: src/display_control.cpp:319
 msgid "n/a"
 msgstr ""
 
-#: src/display-control.cpp:336
+#: src/display_control.cpp:346
 msgid "Display has no configuration: "
+msgstr ""
+
+#: src/display_user_settings.cpp:61
+msgid "Couldn't retrieve user home directory"
+msgstr ""
+
+#: src/display_user_settings.cpp:105 src/display_user_settings.cpp:128
+msgid "Invalid display settings: "
+msgstr ""
+
+#: src/display_user_settings.cpp:152
+msgid "The specified display index has no settings: "
+msgstr ""
+
+#: src/display_user_settings.cpp:182
+msgid "cannot create"
+msgstr ""
+
+#: src/display_user_settings.cpp:199
+msgid "not a directory"
 msgstr ""
 
 #: src/display.cpp:41
