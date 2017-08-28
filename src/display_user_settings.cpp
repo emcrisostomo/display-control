@@ -25,11 +25,15 @@
 #include <stdexcept>
 #include <fstream>
 #include <regex>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "gettext_defs.h"
 #include "cmake_config.h"
 
 namespace emc
 {
+  void create_dir(const std::string& path);
+  static void ensure_directory_exists(const std::string& path);
   static std::string get_data_home_dir();
   static bool parse_settings(std::string settings,
                              std::pair<unsigned int, float>& pair,
@@ -160,10 +164,40 @@ namespace emc
   void display_user_settings::save()
   {
     std::string home = get_data_home_dir();
+    std::string config_file_dir = home + "/" + PACKAGE;
+
+    ensure_directory_exists(config_file_dir);
+
     std::string config_file_path = home + "/" + PACKAGE + "/displays";
     std::ofstream f(config_file_path, std::ios::trunc);
+    if (!f.is_open()) std::cerr << "ouch\n";
 
     for (const auto& p : brightness_settings) f << p.first << ":" << p.second << "\n";
+  }
+
+  void create_dir(const std::string& path)
+  {
+    if (mkdir(path.c_str(), S_IRWXU) != 0)
+    {
+      std::string err = path + ":" + _("cannot create");
+      throw std::runtime_error(err);
+    }
+  }
+
+  void ensure_directory_exists(const std::string& path)
+  {
+    struct stat info{};
+
+    if (stat(path.c_str(), &info) != 0)
+    {
+      create_dir(path);
+      return;
+    }
+
+    if (info.st_mode & S_IFDIR) return;
+
+    std::string err = path + ":" + _("not a directory");
+    throw std::runtime_error(err);
   }
 
   display_user_settings::display_user_settings() = default;
