@@ -140,12 +140,12 @@ namespace emc
     brightness_settings.clear();
   }
 
-  void display_user_settings::set_display_brightness(unsigned int display, float brightness)
+  void display_user_settings::set_display_brightness(unsigned long display, float brightness)
   {
     brightness_settings[display] = brightness;
   }
 
-  float display_user_settings::get_display_brightness(unsigned int display) const
+  float display_user_settings::get_display_brightness(unsigned long display) const
   {
     if (!has_configuration(display))
     {
@@ -156,7 +156,7 @@ namespace emc
     return brightness_settings.at(display);
   }
 
-  bool display_user_settings::has_configuration(unsigned int display) const
+  bool display_user_settings::has_configuration(unsigned long display) const
   {
     return (brightness_settings.find(display) != brightness_settings.end());
   }

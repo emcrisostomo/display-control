@@ -35,13 +35,13 @@ namespace emc
     ~display_user_settings();
 
     void clear();
-    void set_display_brightness(unsigned int display, float brightness);
-    float get_display_brightness(unsigned int display) const;
-    bool has_configuration(unsigned int display) const;
+    void set_display_brightness(unsigned long display, float brightness);
+    float get_display_brightness(unsigned long display) const;
+    bool has_configuration(unsigned long display) const;
     void save();
 
   private:
-    std::unordered_map<unsigned int, float> brightness_settings;
+    std::unordered_map<unsigned long, float> brightness_settings;
   };
 }
 
