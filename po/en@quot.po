@@ -29,8 +29,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: display-control 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2017-08-28 11:25+0200\n"
-"PO-Revision-Date: 2017-08-28 11:25+0200\n"
+"POT-Creation-Date: 2017-08-28 16:25+0200\n"
+"PO-Revision-Date: 2017-08-28 16:25+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en@quot\n"
@@ -174,25 +174,17 @@ msgstr "n/a"
 msgid "Display has no configuration: "
 msgstr "Display has no configuration: "
 
-#: src/display_user_settings.cpp:61
+#: src/display_user_settings.cpp:60
 msgid "Couldn't retrieve user home directory"
 msgstr "Couldn't retrieve user home directory"
 
-#: src/display_user_settings.cpp:105 src/display_user_settings.cpp:128
+#: src/display_user_settings.cpp:104 src/display_user_settings.cpp:127
 msgid "Invalid display settings: "
 msgstr "Invalid display settings: "
 
-#: src/display_user_settings.cpp:152
+#: src/display_user_settings.cpp:151
 msgid "The specified display index has no settings: "
 msgstr "The specified display index has no settings: "
-
-#: src/display_user_settings.cpp:182
-msgid "cannot create"
-msgstr "cannot create"
-
-#: src/display_user_settings.cpp:199
-msgid "not a directory"
-msgstr "not a directory"
 
 #: src/display.cpp:41
 msgid "CGGetOnlineDisplayList returned error: "

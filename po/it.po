@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: display-control 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2017-08-28 11:25+0200\n"
-"PO-Revision-Date: 2017-08-28 13:46+0200\n"
+"POT-Creation-Date: 2017-08-28 16:25+0200\n"
+"PO-Revision-Date: 2017-08-28 16:26+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -47,12 +47,15 @@ msgid ""
 "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
 "html>.\n"
 msgstr ""
-"Licenza GLPv3+: GNU GPL versione 3 o successive <http://gnu.org/licenses/gpl.\n"
+"Licenza GLPv3+: GNU GPL versione 3 o successive <http://gnu.org/licenses/"
+"gpl.\n"
 "html>.\n"
 
 #: src/display_control.cpp:191
 msgid "This is free software: you are free to change and redistribute it.\n"
-msgstr "Questo programma è free software: sei libero di modificarlo e ridistribuirlo.\n"
+msgstr ""
+"Questo programma è free software: sei libero di modificarlo e "
+"ridistribuirlo.\n"
 
 #: src/display_control.cpp:192
 msgid "There is NO WARRANTY, to the extent permitted by law.\n"
@@ -68,9 +71,7 @@ msgstr "Sintassi:\n"
 
 #: src/display_control.cpp:205
 msgid " [OPTION] ... path ...\n"
-msgstr ""
-" [OPZIONE] ... percorso ...\n"
-" "
+msgstr " [OPZIONE] ... percorso ...\n"
 
 #: src/display_control.cpp:207 src/display_control.cpp:224
 msgid "Options:\n"
@@ -102,7 +103,7 @@ msgstr "Salva le impostazioni di luminosità.\n"
 
 #: src/display_control.cpp:214
 msgid "Print verbose output.\n"
-msgstr ""
+msgstr "Mostra messaggi dettagliati.\n"
 
 #: src/display_control.cpp:215
 msgid "Print the version of "
@@ -110,16 +111,17 @@ msgstr "Mostra la versione di "
 
 #: src/display_control.cpp:215
 msgid " and exit.\n"
-msgstr ""
-" ed esci.\n"
-" "
+msgstr " ed esci.\n"
 
 #: src/display_control.cpp:233
 msgid ""
 "\n"
 "See the man page for more information.\n"
 "\n"
-msgstr "\nConsulta la pagina man per avere ulteriori informazioni.\n\n"
+msgstr ""
+"\n"
+"Consulta la pagina man per avere ulteriori informazioni.\n"
+"\n"
 
 #: src/display_control.cpp:235
 msgid "Report bugs to <"
@@ -154,25 +156,17 @@ msgstr "n/d"
 msgid "Display has no configuration: "
 msgstr "Il monitor non ha impostazioni: "
 
-#: src/display_user_settings.cpp:61
+#: src/display_user_settings.cpp:60
 msgid "Couldn't retrieve user home directory"
 msgstr "Non si può deteriminare la directory home dell'utente"
 
-#: src/display_user_settings.cpp:105 src/display_user_settings.cpp:128
+#: src/display_user_settings.cpp:104 src/display_user_settings.cpp:127
 msgid "Invalid display settings: "
 msgstr "Impostazioni del monitor invalide: "
 
-#: src/display_user_settings.cpp:152
+#: src/display_user_settings.cpp:151
 msgid "The specified display index has no settings: "
 msgstr "Il monitor con l'indice specificato non ha impostazioni: "
-
-#: src/display_user_settings.cpp:182
-msgid "cannot create"
-msgstr "non si può creare"
-
-#: src/display_user_settings.cpp:199
-msgid "not a directory"
-msgstr "non è una directory"
 
 #: src/display.cpp:41
 msgid "CGGetOnlineDisplayList returned error: "
@@ -185,3 +179,9 @@ msgstr "IODisplayGetFloatParameter ha restituito un errore: "
 #: src/display.cpp:158
 msgid "IODisplaySetFloatParameter returned error: "
 msgstr "IODisplaySetFloatParameter ha restituito un errore: "
+
+#~ msgid "cannot create"
+#~ msgstr "non si può creare"
+
+#~ msgid "not a directory"
+#~ msgstr "non è una directory"

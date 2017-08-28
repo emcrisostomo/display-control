@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: display-control 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2017-08-28 11:25+0200\n"
-"PO-Revision-Date: 2017-08-28 13:36+0200\n"
+"POT-Creation-Date: 2017-08-28 16:25+0200\n"
+"PO-Revision-Date: 2017-08-28 16:27+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -46,7 +46,9 @@ msgstr "Puede especificarse sólo un comando."
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
 "html>.\n"
-msgstr "Licencia GPLv3+: GNU GPL versión 3 o sucesiva <http://gnu.org/licenses/gpl."
+msgstr ""
+"Licencia GPLv3+: GNU GPL versión 3 o sucesiva <http://gnu.org/licenses/gpl.\n"
+"html>.\n"
 
 #: src/display_control.cpp:191
 msgid "This is free software: you are free to change and redistribute it.\n"
@@ -113,7 +115,10 @@ msgid ""
 "\n"
 "See the man page for more information.\n"
 "\n"
-msgstr "\nConsulta a la página man para más informaciones.\n\n"
+msgstr ""
+"\n"
+"Consulta a la página man para más informaciones.\n"
+"\n"
 
 #: src/display_control.cpp:235
 msgid "Report bugs to <"
@@ -148,25 +153,17 @@ msgstr "n/a"
 msgid "Display has no configuration: "
 msgstr "El monitor no tiene configuración: "
 
-#: src/display_user_settings.cpp:61
+#: src/display_user_settings.cpp:60
 msgid "Couldn't retrieve user home directory"
 msgstr "No se puede recuperar la carpeta home del usuario"
 
-#: src/display_user_settings.cpp:105 src/display_user_settings.cpp:128
+#: src/display_user_settings.cpp:104 src/display_user_settings.cpp:127
 msgid "Invalid display settings: "
 msgstr "Impostaciones del monitor inválidas: "
 
-#: src/display_user_settings.cpp:152
+#: src/display_user_settings.cpp:151
 msgid "The specified display index has no settings: "
 msgstr "El monitor con el índice especificado no tiene impostaciones: "
-
-#: src/display_user_settings.cpp:182
-msgid "cannot create"
-msgstr "no se puede crear"
-
-#: src/display_user_settings.cpp:199
-msgid "not a directory"
-msgstr "no es una directory"
 
 #: src/display.cpp:41
 msgid "CGGetOnlineDisplayList returned error: "
@@ -179,3 +176,9 @@ msgstr "IODisplayGetFloatParameter devolvió un error: "
 #: src/display.cpp:158
 msgid "IODisplaySetFloatParameter returned error: "
 msgstr "IODisplaySetFloatParameter devolvió un error: "
+
+#~ msgid "cannot create"
+#~ msgstr "no se puede crear"
+
+#~ msgid "not a directory"
+#~ msgstr "no es una directory"
