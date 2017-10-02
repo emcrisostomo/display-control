@@ -15,6 +15,12 @@
  */
 
 #include "display_user_settings.h"
+#ifdef HAVE_CONFIG_H
+#  include "display_control_config.h"
+#endif
+#ifdef HAVE_CMAKE_CONFIG_H
+#  include "cmake_config.h"
+#endif
 #include <iostream>
 #include <string>
 #include <cstring>
@@ -29,7 +35,6 @@
 #include <sys/types.h>
 #include "gettext_defs.h"
 #include "filesystem.h"
-#include "cmake_config.h"
 
 namespace emc
 {
