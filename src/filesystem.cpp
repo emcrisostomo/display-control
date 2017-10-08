@@ -21,13 +21,27 @@
 #include <sys/types.h>
 #include <cerrno>
 
+static void mkdir_or_throw(const std::string& path);
+
+void mkdir_or_throw(const std::string& path)
+{
+  if (mkdir(path.c_str(), S_IRWXU) != 0 && (errno != EISDIR && errno != EEXIST))
+  {
+    throw std::runtime_error(std::strerror(errno));
+  }
+}
+
 void emc::filesystem::create_dir(const std::string& path)
 {
-  int ret = mkdir(path.c_str(), S_IRWXU);
+  for (std::string::const_iterator it = path.begin(); it < path.end(); it++)
+  {
+    if (*it == '/')
+    {
+      mkdir_or_throw(std::string(path.begin(), it + 1));
+    }
+  }
 
-  if (ret == 0 || errno == EEXIST) return;
-
-  throw std::runtime_error(std::strerror(errno));
+  mkdir_or_throw(path);
 }
 
 bool emc::filesystem::is_dir(const std::string& path)
