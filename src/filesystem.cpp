@@ -25,16 +25,9 @@ void emc::filesystem::create_dir(const std::string& path)
 {
   int ret = mkdir(path.c_str(), S_IRWXU);
 
-  if (ret == 0) return;
+  if (ret == 0 || errno == EEXIST) return;
 
-  switch (errno)
-  {
-  case EEXIST:
-    if (is_dir(path)) return;
-
-  default:
-    throw std::runtime_error(std::strerror(errno));
-  }
+  throw std::runtime_error(std::strerror(errno));
 }
 
 bool emc::filesystem::is_dir(const std::string& path)
