@@ -42,7 +42,7 @@ namespace emc
 
   private:
     T handle;
-    F *resource_releaser;
+    F resource_releaser;
   };
 }
 
