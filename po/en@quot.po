@@ -1,7 +1,7 @@
 # English translations for display-control package.
-# Copyright (C) 2017 Enrico M. Crisostomo
+# Copyright (C) 2018 Enrico M. Crisostomo
 # This file is distributed under the same license as the display-control package.
-# Automatically generated, 2017.
+# Automatically generated, 2018.
 #
 # All this catalog "translates" are quotation characters.
 # The msgids must be ASCII and therefore cannot contain real quotation
@@ -27,10 +27,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: display-control 1.1.0\n"
+"Project-Id-Version: display-control 1.2.0\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2017-08-28 16:47+0200\n"
-"PO-Revision-Date: 2017-08-28 16:47+0200\n"
+"POT-Creation-Date: 2018-03-05 22:44+0100\n"
+"PO-Revision-Date: 2018-03-05 22:44+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en@quot\n"
@@ -174,15 +174,15 @@ msgstr "n/a"
 msgid "Display has no configuration: "
 msgstr "Display has no configuration: "
 
-#: src/display_user_settings.cpp:60
+#: src/display_user_settings.cpp:65
 msgid "Couldn't retrieve user home directory"
 msgstr "Couldn't retrieve user home directory"
 
-#: src/display_user_settings.cpp:104 src/display_user_settings.cpp:127
+#: src/display_user_settings.cpp:109 src/display_user_settings.cpp:132
 msgid "Invalid display settings: "
 msgstr "Invalid display settings: "
 
-#: src/display_user_settings.cpp:151
+#: src/display_user_settings.cpp:156
 msgid "The specified display index has no settings: "
 msgstr "The specified display index has no settings: "
 

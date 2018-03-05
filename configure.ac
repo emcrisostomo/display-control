@@ -1,6 +1,6 @@
 #                                               -*- Autoconf -*-
 #
-# Copyright (C) 2017 Enrico M. Crisostomo
+# Copyright (C) 2017-2018 Enrico M. Crisostomo
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -21,7 +21,7 @@ dnl Copyright (C) 2017 Enrico M. Crisostomo
 AC_PREREQ([2.69])
 m4_include([m4/display_control_version.m4])
 AC_INIT([display-control], DISPLAY_CONTROL_VERSION, [enrico.m.crisostomo@gmail.com], [], [https://github.com/emcrisostomo/display-control])
-AC_COPYRIGHT([2017 (C) Enrico M. Crisostomo])
+AC_COPYRIGHT([2017-2018 (C) Enrico M. Crisostomo])
 AC_REVISION([$Revision: DISPLAY_CONTROL_REVISION$])
 AC_CONFIG_SRCDIR([src/display_control.cpp])
 AC_CONFIG_AUX_DIR([config])

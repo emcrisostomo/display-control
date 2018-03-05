@@ -1,6 +1,13 @@
 NEWS
 ****
 
+1.2.0:
+
+  * Save the brightness value in a configuration file.
+  * Add CMake project
+
+1.1.0:
+
   * Initial version.
   * List displays and their current brightness value.
   * Update the brightness value of a list of displays.
