@@ -174,7 +174,7 @@ namespace emc
                                      &service_iterator) != kIOReturnSuccess)
       return 0;
 
-    emc::object_guard<io_iterator_t, decltype(&IOObjectRelease)> service_guard(service_iterator, &IOObjectRelease);
+    emc::object_guard<io_iterator_t, decltype(&IOObjectRelease)> service_iterator_guard(service_iterator, &IOObjectRelease);
 
     io_service_t service;
 
