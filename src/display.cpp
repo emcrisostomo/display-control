@@ -180,7 +180,8 @@ namespace emc
                                      &service_iterator) != kIOReturnSuccess)
       return 0;
 
-    emc::object_guard<io_iterator_t, decltype(&IOObjectRelease)> service_iterator_guard(service_iterator, &IOObjectRelease);
+    emc::object_guard<io_iterator_t, decltype(&IOObjectRelease)>
+      service_iterator_guard(service_iterator, &IOObjectRelease);
 
     io_service_t service;
 
@@ -212,7 +213,9 @@ namespace emc
 
     int64_t number_value;
 
-    return CFNumberGetValue(number, kCFNumberSInt64Type, &number_value) &&
+    return CFNumberGetValue(number,
+                            kCFNumberSInt64Type,
+                            &number_value) &&
            number_value == uint32;
   }
 }
