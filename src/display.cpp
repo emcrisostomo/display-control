@@ -15,6 +15,7 @@
  */
 
 #include "display.h"
+#include "service_guard.h"
 #include <system_error>
 #include <sstream>
 #include "gettext_defs.h"
@@ -23,7 +24,7 @@
 
 namespace emc
 {
-  static io_service_t find_io_service(CGDirectDisplayID display_id);
+  static service_guard find_io_service(CGDirectDisplayID display_id);
   static bool compare(CFNumberRef number, uint32_t uint32);
 
   std::vector<display> display::find_active()
@@ -126,15 +127,13 @@ namespace emc
 
   float display::get_brightness() const
   {
-    io_service_t service = find_io_service(this->display_id);
+    service_guard service = find_io_service(this->display_id);
     float current_brightness;
 
     IOReturn ret = IODisplayGetFloatParameter(service,
                                               kNilOptions,
                                               CFSTR(kIODisplayBrightnessKey),
                                               &current_brightness);
-
-    IOObjectRelease(service);
 
     if (ret != kIOReturnSuccess)
     {
@@ -149,14 +148,12 @@ namespace emc
 
   void display::set_brightness(float brightness)
   {
-    io_service_t service = find_io_service(this->display_id);
+    service_guard service = find_io_service(this->display_id);
 
     IOReturn ret = IODisplaySetFloatParameter(service,
                                               kNilOptions,
                                               CFSTR(kIODisplayBrightnessKey),
                                               brightness);
-
-    IOObjectRelease(service);
 
     if (ret != kIOReturnSuccess)
     {
@@ -167,7 +164,7 @@ namespace emc
     }
   }
 
-  io_service_t find_io_service(CGDirectDisplayID display_id)
+  service_guard find_io_service(CGDirectDisplayID display_id)
   {
     uint32_t vendor = CGDisplayVendorNumber(display_id);
     uint32_t model = CGDisplayModelNumber(display_id);
@@ -178,14 +175,14 @@ namespace emc
     if (IOServiceGetMatchingServices(kIOMasterPortDefault,
                                      IOServiceMatching("IODisplayConnect"),
                                      &service_iterator) != kIOReturnSuccess)
-      return 0;
+      return service_guard(0);
 
     emc::object_guard<io_iterator_t, decltype(&IOObjectRelease)>
       service_iterator_guard(service_iterator, &IOObjectRelease);
 
-    io_service_t service;
+    service_guard service;
 
-    while ((service = IOIteratorNext(service_iterator)) != 0)
+    while ((service = service_guard(IOIteratorNext(service_iterator))) != (io_service_t)0)
     {
       CFDictionaryRef info = IODisplayCreateInfoDictionary(service, kIODisplayNoProductName);
       emc::object_guard<CFDictionaryRef, decltype(&CFRelease)> info_o_guard(info, &CFRelease);
@@ -200,11 +197,9 @@ namespace emc
       {
         return service;
       }
-
-      IOObjectRelease(service);
     }
 
-    return 0;
+    return service_guard(0);
   }
 
   bool compare(CFNumberRef number, uint32_t uint32)
