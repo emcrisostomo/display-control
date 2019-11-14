@@ -64,8 +64,10 @@ namespace emc
   {
     //@formatter:off
     active = static_cast<bool>(CGDisplayIsActive(this->display_id));
+    always_in_mirror_set = static_cast<bool>(CGDisplayIsAlwaysInMirrorSet(this->display_id));
     asleep = static_cast<bool>(CGDisplayIsAsleep(this->display_id));
     builtin = static_cast<bool>(CGDisplayIsBuiltin(this->display_id));
+    in_hw_mirror_set = static_cast<bool>(CGDisplayIsInHWMirrorSet(this->display_id));
     in_mirror_set = static_cast<bool>(CGDisplayIsInMirrorSet(this->display_id));
     main = static_cast<bool>(CGDisplayIsMain(this->display_id));
     online = static_cast<bool>(CGDisplayIsOnline(this->display_id));
@@ -132,6 +134,8 @@ namespace emc
                                               CFSTR(kIODisplayBrightnessKey),
                                               &current_brightness);
 
+    IOObjectRelease(service);
+
     if (ret != kIOReturnSuccess)
     {
       std::ostringstream oss;
@@ -151,6 +155,8 @@ namespace emc
                                               kNilOptions,
                                               CFSTR(kIODisplayBrightnessKey),
                                               brightness);
+
+    IOObjectRelease(service);
 
     if (ret != kIOReturnSuccess)
     {
@@ -193,6 +199,8 @@ namespace emc
       {
         return service;
       }
+
+      IOObjectRelease(service);
     }
 
     return 0;

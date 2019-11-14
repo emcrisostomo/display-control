@@ -49,8 +49,10 @@ namespace emc
     static const int DC_MAX_DISPLAYS = 128;
     CGDirectDisplayID display_id;
     bool active;
+    bool always_in_mirror_set;
     bool asleep;
     bool builtin;
+    bool in_hw_mirror_set;
     bool in_mirror_set;
     bool main;
     bool online;
