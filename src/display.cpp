@@ -214,6 +214,5 @@ namespace emc
 
     return CFNumberGetValue(number, kCFNumberSInt64Type, &number_value) &&
            number_value == uint32;
-
   }
 }
