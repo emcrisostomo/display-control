@@ -23,8 +23,8 @@ namespace emc
   class object_guard
   {
   public:
-    object_guard(T handle, F resource_releaser) : handle(handle),
-                                                  resource_releaser(resource_releaser)
+    object_guard(T handle, F deleter) : handle(handle),
+                                        deleter(deleter)
     {
     }
 
@@ -34,7 +34,7 @@ namespace emc
     virtual ~object_guard()
     {
       if (handle != null_handle)
-        resource_releaser(handle);
+        deleter(handle);
     }
 
     operator T() const
@@ -44,7 +44,7 @@ namespace emc
 
   private:
     T handle;
-    F resource_releaser;
+    F deleter;
   };
 }
 
