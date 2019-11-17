@@ -33,6 +33,7 @@ namespace emc
 
     object_guard(object_guard&& other) noexcept
     {
+      deleter = other.deleter;
       handle = other.handle;
       other.handle = null_handle;
     }
@@ -42,6 +43,7 @@ namespace emc
       if (this == &other) return *this;
 
       if (handle != null_handle) deleter(handle);
+      deleter = other.deleter;
       handle = other.handle;
       other.handle = null_handle;
 

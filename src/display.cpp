@@ -15,7 +15,6 @@
  */
 
 #include "display.h"
-#include "service_guard.h"
 #include <system_error>
 #include <sstream>
 #include "gettext_defs.h"
@@ -24,6 +23,7 @@
 
 namespace emc
 {
+  typedef object_guard<io_service_t, decltype(&IOObjectRelease), 0> service_guard;
   static service_guard find_io_service(CGDirectDisplayID display_id);
   static bool compare(CFNumberRef number, uint32_t uint32);
 
@@ -175,14 +175,14 @@ namespace emc
     if (IOServiceGetMatchingServices(kIOMasterPortDefault,
                                      IOServiceMatching("IODisplayConnect"),
                                      &service_iterator) != kIOReturnSuccess)
-      return service_guard(0);
+      return service_guard(0, &IOObjectRelease);
 
     emc::object_guard<io_iterator_t, decltype(&IOObjectRelease), 0>
       service_iterator_guard(service_iterator, &IOObjectRelease);
 
-    service_guard service;
+    service_guard service(0, &IOObjectRelease);
 
-    while ((service = service_guard(IOIteratorNext(service_iterator))) != (io_service_t) 0)
+    while ((service = service_guard(IOIteratorNext(service_iterator), &IOObjectRelease)) != (io_service_t) 0)
     {
       CFDictionaryRef info = IODisplayCreateInfoDictionary(service, kIODisplayNoProductName);
       emc::object_guard<CFDictionaryRef, decltype(&CFRelease)> info_o_guard(info, &CFRelease);
@@ -199,7 +199,7 @@ namespace emc
       }
     }
 
-    return service_guard(0);
+    return service_guard(0, &IOObjectRelease);
   }
 
   bool compare(CFNumberRef number, uint32_t uint32)
