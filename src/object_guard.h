@@ -19,11 +19,12 @@
 
 namespace emc
 {
-  template<typename T, typename F>
+  template<typename T, typename F, T null_handle = nullptr>
   class object_guard
   {
   public:
-    object_guard(T handle, F resource_releaser) : handle(handle), resource_releaser(resource_releaser)
+    object_guard(T handle, F resource_releaser) : handle(handle),
+                                                  resource_releaser(resource_releaser)
     {
     }
 
@@ -32,7 +33,8 @@ namespace emc
 
     virtual ~object_guard()
     {
-      resource_releaser(handle);
+      if (handle != null_handle)
+        resource_releaser(handle);
     }
 
     operator T() const
