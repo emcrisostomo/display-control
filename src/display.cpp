@@ -184,8 +184,9 @@ namespace emc
 
     while ((service = service_guard(IOIteratorNext(service_iterator), &IOObjectRelease)) != (io_service_t) 0)
     {
-      CFDictionaryRef info = IODisplayCreateInfoDictionary(service, kIODisplayNoProductName);
-      emc::object_guard<CFDictionaryRef, decltype(&CFRelease)> info_o_guard(info, &CFRelease);
+      emc::object_guard<CFDictionaryRef, decltype(&CFRelease)> info(
+        IODisplayCreateInfoDictionary(service, kIODisplayNoProductName),
+        &CFRelease);
 
       auto vendorID = static_cast<CFNumberRef>(CFDictionaryGetValue(info, CFSTR(kDisplayVendorID)));
       auto productID = static_cast<CFNumberRef>(CFDictionaryGetValue(info, CFSTR(kDisplayProductID)));
