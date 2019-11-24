@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Enrico M. Crisostomo
+ * Copyright (c) 2017-2019 Enrico M. Crisostomo
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -17,9 +17,22 @@
 #include "display.h"
 #include <system_error>
 #include <sstream>
+#include <stdexcept>
 #include "gettext_defs.h"
 #include "object_guard.h"
 #include <IOKit/graphics/IOGraphicsLib.h>
+
+extern "C"
+{
+// macOS 10.12.4 introduces new undocumented APIs to control the display brightness.
+// Weak link these symbols and use them if available.
+// The linker has been configured to allow these symbols to be weak linked with:
+//   -Wl,-U_symbol_name
+double CoreDisplay_Display_GetUserBrightness(CGDirectDisplayID id) __attribute__((weak_import));
+void CoreDisplay_Display_SetUserBrightness(CGDirectDisplayID id, double brightness) __attribute__((weak_import));
+_Bool DisplayServicesCanChangeBrightness(CGDirectDisplayID id) __attribute__((weak_import));
+void DisplayServicesBrightnessChanged(CGDirectDisplayID id, double brightness) __attribute__((weak_import));
+}
 
 namespace emc
 {
@@ -127,9 +140,24 @@ namespace emc
 
   float display::get_brightness() const
   {
-    service_guard service = find_io_service(this->display_id);
+    if (CoreDisplay_Display_GetUserBrightness != nullptr)
+    {
+      if (DisplayServicesCanChangeBrightness != nullptr
+          && !DisplayServicesCanChangeBrightness(this->display_id))
+      {
+        std::ostringstream oss;
+        oss << _("Cannot get brightness of display: ")
+            << this->display_id;
+
+        throw std::runtime_error(oss.str());
+      }
+
+      return (float) CoreDisplay_Display_GetUserBrightness(this->display_id);
+    }
+
     float current_brightness;
 
+    service_guard service = find_io_service(this->display_id);
     IOReturn ret = IODisplayGetFloatParameter(service,
                                               kNilOptions,
                                               CFSTR(kIODisplayBrightnessKey),
@@ -148,6 +176,25 @@ namespace emc
 
   void display::set_brightness(float brightness)
   {
+    if (CoreDisplay_Display_SetUserBrightness != nullptr)
+    {
+      if (DisplayServicesCanChangeBrightness != nullptr
+          && !DisplayServicesCanChangeBrightness(this->display_id))
+      {
+        std::ostringstream oss;
+        oss << _("Cannot get brightness of display: ")
+            << this->display_id;
+
+        throw std::runtime_error(oss.str());
+      }
+
+      CoreDisplay_Display_SetUserBrightness(this->display_id, brightness);
+      if (DisplayServicesBrightnessChanged != nullptr)
+      {
+        DisplayServicesBrightnessChanged(this->display_id, brightness);
+      }
+    }
+
     service_guard service = find_io_service(this->display_id);
 
     IOReturn ret = IODisplaySetFloatParameter(service,

@@ -73,6 +73,8 @@ endif ()
 # check for required frameworks
 find_library(IOKIT_LIBRARY IOKit)
 find_library(APPLICATION_SERVICES_LIBRARY ApplicationServices)
+find_library(CORE_DISPLAY_LIBRARY CoreDisplay)
+find_library(DISPLAY_SERVICES_LIBRARY DisplayServices /System/Library/PrivateFrameworks)
 
 if (NOT IOKIT_LIBRARY)
     message(FATAL_ERROR "Required library IOKit is missing")
@@ -82,7 +84,19 @@ if (NOT APPLICATION_SERVICES_LIBRARY)
     message(FATAL_ERROR "Required library ApplicationServices is missing")
 endif ()
 
-target_link_libraries(display-control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LIBRARY})
+if (NOT CORE_DISPLAY_LIBRARY)
+    message(FATAL_ERROR "Required library CoreDisplay is missing")
+endif ()
+
+if (NOT DISPLAY_SERVICES_LIBRARY)
+    message(FATAL_ERROR "Required library DisplayServices is missing")
+endif ()
+
+target_link_libraries(display-control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LIBRARY} ${CORE_DISPLAY_LIBRARY} ${DISPLAY_SERVICES_LIBRARY})
+target_link_options(display-control PRIVATE "-Wl,-U,_CoreDisplay_Display_SetUserBrightness")
+target_link_options(display-control PRIVATE "-Wl,-U,_CoreDisplay_Display_GetUserBrightness")
+target_link_options(display-control PRIVATE "-Wl,-U,_DisplayServicesCanChangeBrightness")
+target_link_options(display-control PRIVATE "-Wl,-U,_DisplayServicesBrightnessChanged")
 
 configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
 

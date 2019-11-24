@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2017 Enrico M. Crisostomo
+# Copyright (c) 2017-2019 Enrico M. Crisostomo
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -35,6 +35,13 @@ display_control_SOURCES += src/object_guard.h
 
 display_control_LDFLAGS  = -framework IOKit
 display_control_LDFLAGS += -framework ApplicationServices
+display_control_LDFLAGS += -framework CoreDisplay
+display_control_LDFLAGS += -F /System/Library/PrivateFrameworks
+display_control_LDFLAGS += -framework DisplayServices
+display_control_LDFLAGS += -Wl,-U,_CoreDisplay_Display_SetUserBrightness
+display_control_LDFLAGS += -Wl,-U,_CoreDisplay_Display_GetUserBrightness
+display_control_LDFLAGS += -Wl,-U,_DisplayServicesCanChangeBrightness
+display_control_LDFLAGS += -Wl,-U,_DisplayServicesBrightnessChanged
 
 # Prepare gettext-related symbols used by programs
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
