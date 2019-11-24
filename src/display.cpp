@@ -15,7 +15,6 @@
  */
 
 #include "display.h"
-#include <system_error>
 #include <sstream>
 #include <stdexcept>
 #include "gettext_defs.h"
