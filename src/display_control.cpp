@@ -332,7 +332,7 @@ int restore_displays()
 
   int ret = DC_EXIT_OK;
 
-  for (auto& d : displays)
+  for (const auto& d : displays)
   {
     if (d >= active_displays.size())
     {
