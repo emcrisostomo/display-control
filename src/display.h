@@ -43,8 +43,13 @@ namespace emc
     bool is_mirrored() const;
     float get_brightness() const;
     void set_brightness(float brightness);
+
   private:
     display(CGDirectDisplayID display_id);
+    float coredisplay_get_brightness() const;
+    void coredisplay_set_brightness(float brightness);
+    float iokit_get_brightness() const;
+    void iokit_set_brightness(float brightness);
 
     static const int DC_MAX_DISPLAYS = 128;
     CGDirectDisplayID display_id;

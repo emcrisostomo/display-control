@@ -38,6 +38,7 @@ namespace emc
   typedef object_guard<io_service_t, decltype(&IOObjectRelease), 0> service_guard;
   static service_guard find_io_service(CGDirectDisplayID display_id);
   static bool compare(CFNumberRef number, uint32_t uint32);
+  static bool coredisplay_is_available();
 
   std::vector<display> display::find_active()
   {
@@ -139,21 +140,45 @@ namespace emc
 
   float display::get_brightness() const
   {
-    if (CoreDisplay_Display_GetUserBrightness != nullptr)
+    if (coredisplay_is_available())
     {
-      if (DisplayServicesCanChangeBrightness != nullptr
-          && !DisplayServicesCanChangeBrightness(this->display_id))
-      {
-        std::ostringstream oss;
-        oss << _("Cannot get brightness of display: ")
-            << this->display_id;
-
-        throw std::runtime_error(oss.str());
-      }
-
-      return (float) CoreDisplay_Display_GetUserBrightness(this->display_id);
+      return coredisplay_get_brightness();
     }
 
+    return iokit_get_brightness();
+  }
+
+  void display::set_brightness(float brightness)
+  {
+    if (coredisplay_is_available())
+    {
+      coredisplay_set_brightness(brightness);
+      return;
+    }
+
+    iokit_set_brightness(brightness);
+  }
+
+  float display::coredisplay_get_brightness() const
+  {
+    if (!coredisplay_is_available())
+      throw std::runtime_error("CoreDisplay is not available.");
+
+    if (DisplayServicesCanChangeBrightness != nullptr
+        && !DisplayServicesCanChangeBrightness(this->display_id))
+    {
+      std::ostringstream oss;
+      oss << _("Cannot get brightness of display: ")
+          << this->display_id;
+
+      throw std::runtime_error(oss.str());
+    }
+
+    return (float) CoreDisplay_Display_GetUserBrightness(this->display_id);
+  }
+
+  float display::iokit_get_brightness() const
+  {
     float current_brightness;
 
     service_guard service = find_io_service(this->display_id);
@@ -173,27 +198,30 @@ namespace emc
     return current_brightness;
   }
 
-  void display::set_brightness(float brightness)
+  void display::coredisplay_set_brightness(float brightness)
   {
-    if (CoreDisplay_Display_SetUserBrightness != nullptr)
+    if (!coredisplay_is_available())
+      throw std::runtime_error("CoreDisplay is not available.");
+
+    if (DisplayServicesCanChangeBrightness != nullptr
+        && !DisplayServicesCanChangeBrightness(this->display_id))
     {
-      if (DisplayServicesCanChangeBrightness != nullptr
-          && !DisplayServicesCanChangeBrightness(this->display_id))
-      {
-        std::ostringstream oss;
-        oss << _("Cannot get brightness of display: ")
-            << this->display_id;
+      std::ostringstream oss;
+      oss << _("Cannot get brightness of display: ")
+          << this->display_id;
 
-        throw std::runtime_error(oss.str());
-      }
-
-      CoreDisplay_Display_SetUserBrightness(this->display_id, brightness);
-      if (DisplayServicesBrightnessChanged != nullptr)
-      {
-        DisplayServicesBrightnessChanged(this->display_id, brightness);
-      }
+      throw std::runtime_error(oss.str());
     }
 
+    CoreDisplay_Display_SetUserBrightness(this->display_id, brightness);
+    if (DisplayServicesBrightnessChanged != nullptr)
+    {
+      DisplayServicesBrightnessChanged(this->display_id, brightness);
+    }
+  }
+
+  void display::iokit_set_brightness(float brightness)
+  {
     service_guard service = find_io_service(this->display_id);
 
     IOReturn ret = IODisplaySetFloatParameter(service,
@@ -208,6 +236,13 @@ namespace emc
 
       throw std::runtime_error(oss.str());
     }
+  }
+
+  bool coredisplay_is_available()
+  {
+    return
+      (CoreDisplay_Display_GetUserBrightness != nullptr
+       && CoreDisplay_Display_SetUserBrightness != nullptr);
   }
 
   service_guard find_io_service(CGDirectDisplayID display_id)
