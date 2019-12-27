@@ -1,6 +1,6 @@
 #                                               -*- Autoconf -*-
 #
-# Copyright (C) 2017-2018 Enrico M. Crisostomo
+# Copyright (C) 2017-2019 Enrico M. Crisostomo
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -63,6 +63,13 @@ AC_CHECK_HEADERS([unistd.h], [], [AC_MSG_ERROR([A required header file is missin
 AC_CHECK_HEADERS([CoreFoundation/CoreFoundation.h], [], [AC_MSG_ERROR([A required header file is missing.])])
 AC_CHECK_HEADERS([IOKit/graphics/IOGraphicsLib.h], [], [AC_MSG_ERROR([A required header file is missing.])])
 AC_CHECK_HEADERS([ApplicationServices/ApplicationServices.h], [], [AC_MSG_ERROR([A required header file is missing.])])
+
+# Check for undocumented frameworks
+MACOS_SDK_PATH="$(xcrun --show-sdk-path)"
+CORE_DISPLAY_PATH="${MACOS_SDK_PATH}/System/Library/Frameworks/CoreDisplay.framework"
+DISPLAY_SERVICES_PATH="${MACOS_SDK_PATH}/System/Library/PrivateFrameworks/DisplayServices.framework"
+AC_CACHE_CHECK([CoreDisplay], [emc_cv_lib_coredisplay], [AS_IF([test -d "${CORE_DISPLAY_PATH}"], [emc_cv_lib_coredisplay=yes], [emc_cv_lib_coredisplay=no])])
+AC_CACHE_CHECK([DisplayServices], [emc_cv_lib_displayservices], [AS_IF([test -d "${DISPLAY_SERVICES_PATH}"], [emc_cv_lib_displayservices=yes], [emc_cv_lib_displayservices=no])])
 
 # Check for optional getopt_long
 AC_CHECK_HEADERS([getopt.h])
