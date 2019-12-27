@@ -15,19 +15,19 @@ set(LOCALEDIR         "${CMAKE_INSTALL_PREFIX}/share/locale" CACHE FILEPATH "loc
 #@formatter:on
 
 if (NOT APPLE)
-    message(FATAL_ERROR "Unsupported operating system ${CMAKE_HOST_SYSTEM_NAME} ${CMAKE_HOST_SYSTEM_VERSION}")
+  message(FATAL_ERROR "Unsupported operating system ${CMAKE_HOST_SYSTEM_NAME} ${CMAKE_HOST_SYSTEM_VERSION}")
 endif ()
 
 set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES
-        src/display_control.cpp
-        src/display_control.h
-        src/gettext.h
-        src/gettext_defs.h
-        src/display.cpp src/display.h
-        src/object_guard.h
-        src/display_user_settings.cpp src/display_user_settings.h
-        src/filesystem.cpp src/filesystem.h)
+    src/display_control.cpp
+    src/display_control.h
+    src/gettext.h
+    src/gettext_defs.h
+    src/display.cpp src/display.h
+    src/object_guard.h
+    src/display_user_settings.cpp src/display_user_settings.h
+    src/filesystem.cpp src/filesystem.h)
 add_executable(display-control ${SOURCE_FILES})
 
 include(CheckIncludeFileCXX)
@@ -45,29 +45,29 @@ check_include_file_cxx(display-control_config.h HAVE_CONFIG_H)
 check_include_file_cxx(getopt.h HAVE_GETOPT_H)
 
 if (HAVE_GETOPT_H)
-    check_symbol_exists(getopt_long getopt.h HAVE_GETOPT_LONG)
+  check_symbol_exists(getopt_long getopt.h HAVE_GETOPT_LONG)
 endif (HAVE_GETOPT_H)
 
 # gettext and intl
 if (Intl_FOUND AND GETTEXT_FOUND)
-    option(USE_NLS "Use NLS" ON)
+  option(USE_NLS "Use NLS" ON)
 endif ()
 
 if (USE_NLS)
-    set(ENABLE_NLS 1)
+  set(ENABLE_NLS 1)
 
-    if (Intl_LIBRARIES)
-        target_link_libraries(display-control ${Intl_LIBRARIES})
-    endif ()
+  if (Intl_LIBRARIES)
+    target_link_libraries(display-control ${Intl_LIBRARIES})
+  endif ()
 
-    # gettext configuration
-    set(LINGUAS en en@quot en@boldquot it es)
+  # gettext configuration
+  set(LINGUAS en en@quot en@boldquot it es)
 
-    foreach (language ${LINGUAS})
-        configure_file(${PROJECT_SOURCE_DIR}/po/${language}.po ${PROJECT_BINARY_DIR}/${language}.po COPYONLY)
-    endforeach ()
+  foreach (language ${LINGUAS})
+    configure_file(${PROJECT_SOURCE_DIR}/po/${language}.po ${PROJECT_BINARY_DIR}/${language}.po COPYONLY)
+  endforeach ()
 
-    gettext_process_pot_file(po/display-control.pot ALL INSTALL_DESTINATION share/locale LANGUAGES ${LINGUAS})
+  gettext_process_pot_file(po/display-control.pot ALL INSTALL_DESTINATION share/locale LANGUAGES ${LINGUAS})
 endif ()
 
 # check for required frameworks
@@ -77,19 +77,19 @@ find_library(CORE_DISPLAY_LIBRARY CoreDisplay)
 find_library(DISPLAY_SERVICES_LIBRARY DisplayServices /System/Library/PrivateFrameworks)
 
 if (NOT IOKIT_LIBRARY)
-    message(FATAL_ERROR "Required library IOKit is missing")
+  message(FATAL_ERROR "Required library IOKit is missing")
 endif ()
 
 if (NOT APPLICATION_SERVICES_LIBRARY)
-    message(FATAL_ERROR "Required library ApplicationServices is missing")
+  message(FATAL_ERROR "Required library ApplicationServices is missing")
 endif ()
 
 if (NOT CORE_DISPLAY_LIBRARY)
-    message(FATAL_ERROR "Required library CoreDisplay is missing")
+  message(FATAL_ERROR "Required library CoreDisplay is missing")
 endif ()
 
 if (NOT DISPLAY_SERVICES_LIBRARY)
-    message(FATAL_ERROR "Required library DisplayServices is missing")
+  message(FATAL_ERROR "Required library DisplayServices is missing")
 endif ()
 
 target_link_libraries(display-control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LIBRARY} ${CORE_DISPLAY_LIBRARY} ${DISPLAY_SERVICES_LIBRARY})
