@@ -16,7 +16,7 @@
 #
 # Process this file with autoconf to produce a configure script.
 #
-dnl Copyright (C) 2017 Enrico M. Crisostomo
+dnl Copyright (C) 2017-2019 Enrico M. Crisostomo
 
 AC_PREREQ([2.69])
 m4_include([m4/display_control_version.m4])
