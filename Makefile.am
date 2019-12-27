@@ -36,13 +36,20 @@ display_control_SOURCES += src/object_guard.h
 
 display_control_LDFLAGS  = -framework IOKit
 display_control_LDFLAGS += -framework ApplicationServices
+
+if HAS_COREDISPLAY
 display_control_LDFLAGS += -framework CoreDisplay
-display_control_LDFLAGS += -F $(MACOS_PRIVATE_FRAMEWORKS_PATH)
-display_control_LDFLAGS += -framework DisplayServices
 display_control_LDFLAGS += -Wl,-U,_CoreDisplay_Display_SetUserBrightness
 display_control_LDFLAGS += -Wl,-U,_CoreDisplay_Display_GetUserBrightness
+endif
+
+display_control_LDFLAGS += -F $(MACOS_PRIVATE_FRAMEWORKS_PATH)
+
+if HAS_DISPLAYSERVICES
+display_control_LDFLAGS += -framework DisplayServices
 display_control_LDFLAGS += -Wl,-U,_DisplayServicesCanChangeBrightness
 display_control_LDFLAGS += -Wl,-U,_DisplayServicesBrightnessChanged
+endif
 
 # Prepare gettext-related symbols used by programs
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"

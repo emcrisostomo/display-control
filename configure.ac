@@ -75,8 +75,11 @@ AC_SUBST(MACOS_PRIVATE_FRAMEWORKS_PATH, ["${MACOS_SDK_PATH}/System/Library/Priva
 CORE_DISPLAY_PATH="${MACOS_FRAMEWORKS_PATH}/CoreDisplay.framework"
 DISPLAY_SERVICES_PATH="${MACOS_PRIVATE_FRAMEWORKS_PATH}/DisplayServices.framework"
 
-AC_CACHE_CHECK([CoreDisplay], [emc_cv_lib_coredisplay], [AS_IF([test -d "${CORE_DISPLAY_PATH}"], [emc_cv_lib_coredisplay=yes], [emc_cv_lib_coredisplay=no])])
+AC_CACHE_CHECK([CoreDisplay],     [emc_cv_lib_coredisplay],     [AS_IF([test -d "${CORE_DISPLAY_PATH}"],     [emc_cv_lib_coredisplay=yes],     [emc_cv_lib_coredisplay=no])])
 AC_CACHE_CHECK([DisplayServices], [emc_cv_lib_displayservices], [AS_IF([test -d "${DISPLAY_SERVICES_PATH}"], [emc_cv_lib_displayservices=yes], [emc_cv_lib_displayservices=no])])
+
+AM_CONDITIONAL([HAS_COREDISPLAY],     [test "x${emc_cv_lib_coredisplay}" = "xyes"])
+AM_CONDITIONAL([HAS_DISPLAYSERVICES], [test "x${emc_cv_lib_displayservices}" = "xyes"])
 
 # Check for optional getopt_long
 AC_CHECK_HEADERS([getopt.h])

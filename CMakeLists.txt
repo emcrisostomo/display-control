@@ -84,23 +84,21 @@ if (NOT APPLICATION_SERVICES_LIBRARY)
   message(FATAL_ERROR "Required library ApplicationServices is missing")
 endif ()
 
-if (NOT CORE_DISPLAY_LIBRARY)
-  message(FATAL_ERROR "Required library CoreDisplay is missing")
-endif ()
-
-if (NOT DISPLAY_SERVICES_LIBRARY)
-  message(FATAL_ERROR "Required library DisplayServices is missing")
-endif ()
-
 target_link_libraries(display-control
     ${IOKIT_LIBRARY}
-    ${APPLICATION_SERVICES_LIBRARY}
-    ${CORE_DISPLAY_LIBRARY}
-    ${DISPLAY_SERVICES_LIBRARY})
-target_link_options(display-control PRIVATE "-Wl,-U,_CoreDisplay_Display_SetUserBrightness")
-target_link_options(display-control PRIVATE "-Wl,-U,_CoreDisplay_Display_GetUserBrightness")
-target_link_options(display-control PRIVATE "-Wl,-U,_DisplayServicesCanChangeBrightness")
-target_link_options(display-control PRIVATE "-Wl,-U,_DisplayServicesBrightnessChanged")
+    ${APPLICATION_SERVICES_LIBRARY})
+
+if (CORE_DISPLAY_LIBRARY)
+  target_link_libraries(display-control ${CORE_DISPLAY_LIBRARY})
+  target_link_options(display-control PRIVATE "-Wl,-U,_CoreDisplay_Display_SetUserBrightness")
+  target_link_options(display-control PRIVATE "-Wl,-U,_CoreDisplay_Display_GetUserBrightness")
+endif ()
+
+if (DISPLAY_SERVICES_LIBRARY)
+  target_link_libraries(display-control ${DISPLAY_SERVICES_LIBRARY})
+  target_link_options(display-control PRIVATE "-Wl,-U,_DisplayServicesCanChangeBrightness")
+  target_link_options(display-control PRIVATE "-Wl,-U,_DisplayServicesBrightnessChanged")
+endif ()
 
 configure_file(${PROJECT_SOURCE_DIR}/cmake_config.h.in ${PROJECT_BINARY_DIR}/cmake_config.h)
 
