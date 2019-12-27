@@ -92,7 +92,11 @@ if (NOT DISPLAY_SERVICES_LIBRARY)
   message(FATAL_ERROR "Required library DisplayServices is missing")
 endif ()
 
-target_link_libraries(display-control ${IOKIT_LIBRARY} ${APPLICATION_SERVICES_LIBRARY} ${CORE_DISPLAY_LIBRARY} ${DISPLAY_SERVICES_LIBRARY})
+target_link_libraries(display-control
+    ${IOKIT_LIBRARY}
+    ${APPLICATION_SERVICES_LIBRARY}
+    ${CORE_DISPLAY_LIBRARY}
+    ${DISPLAY_SERVICES_LIBRARY})
 target_link_options(display-control PRIVATE "-Wl,-U,_CoreDisplay_Display_SetUserBrightness")
 target_link_options(display-control PRIVATE "-Wl,-U,_CoreDisplay_Display_GetUserBrightness")
 target_link_options(display-control PRIVATE "-Wl,-U,_DisplayServicesCanChangeBrightness")
