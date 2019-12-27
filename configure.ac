@@ -65,9 +65,16 @@ AC_CHECK_HEADERS([IOKit/graphics/IOGraphicsLib.h], [], [AC_MSG_ERROR([A required
 AC_CHECK_HEADERS([ApplicationServices/ApplicationServices.h], [], [AC_MSG_ERROR([A required header file is missing.])])
 
 # Check for undocumented frameworks
-MACOS_SDK_PATH="$(xcrun --show-sdk-path)"
-CORE_DISPLAY_PATH="${MACOS_SDK_PATH}/System/Library/Frameworks/CoreDisplay.framework"
-DISPLAY_SERVICES_PATH="${MACOS_SDK_PATH}/System/Library/PrivateFrameworks/DisplayServices.framework"
+# The macOS SDK path can be reconfigured using xcrun
+# MACOS_SDK_PATH="$(xcrun --show-sdk-path)"
+MACOS_SDK_PATH=""
+AC_ARG_VAR(MACOS_SDK_PATH, macOS SDK path)
+AC_SUBST(MACOS_FRAMEWORKS_PATH, ["${MACOS_SDK_PATH}/System/Library/Frameworks"])
+AC_SUBST(MACOS_PRIVATE_FRAMEWORKS_PATH, ["${MACOS_SDK_PATH}/System/Library/PrivateFrameworks"])
+
+CORE_DISPLAY_PATH="${MACOS_FRAMEWORKS_PATH}/CoreDisplay.framework"
+DISPLAY_SERVICES_PATH="${MACOS_PRIVATE_FRAMEWORKS_PATH}/DisplayServices.framework"
+
 AC_CACHE_CHECK([CoreDisplay], [emc_cv_lib_coredisplay], [AS_IF([test -d "${CORE_DISPLAY_PATH}"], [emc_cv_lib_coredisplay=yes], [emc_cv_lib_coredisplay=no])])
 AC_CACHE_CHECK([DisplayServices], [emc_cv_lib_displayservices], [AS_IF([test -d "${DISPLAY_SERVICES_PATH}"], [emc_cv_lib_displayservices=yes], [emc_cv_lib_displayservices=no])])
 

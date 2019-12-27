@@ -15,6 +15,7 @@
 #
 ACLOCAL_AMFLAGS = -I m4
 AUTOMAKE_OPTIONS = std-options
+MACOS_PRIVATE_FRAMEWORKS_PATH = @MACOS_PRIVATE_FRAMEWORKS_PATH@
 
 SUBDIRS = po
 
@@ -36,7 +37,7 @@ display_control_SOURCES += src/object_guard.h
 display_control_LDFLAGS  = -framework IOKit
 display_control_LDFLAGS += -framework ApplicationServices
 display_control_LDFLAGS += -framework CoreDisplay
-display_control_LDFLAGS += -F /System/Library/PrivateFrameworks
+display_control_LDFLAGS += -F $(MACOS_PRIVATE_FRAMEWORKS_PATH)
 display_control_LDFLAGS += -framework DisplayServices
 display_control_LDFLAGS += -Wl,-U,_CoreDisplay_Display_SetUserBrightness
 display_control_LDFLAGS += -Wl,-U,_CoreDisplay_Display_GetUserBrightness
