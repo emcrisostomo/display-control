@@ -1,7 +1,7 @@
 # English translations for display-control package.
-# Copyright (C) 2018 Enrico M. Crisostomo
+# Copyright (C) 2019 Enrico M. Crisostomo
 # This file is distributed under the same license as the display-control package.
-# Automatically generated, 2018.
+# Automatically generated, 2019.
 #
 # All this catalog "translates" are quotation characters.
 # The msgids must be ASCII and therefore cannot contain real quotation
@@ -27,10 +27,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: display-control 1.2.0\n"
+"Project-Id-Version: display-control 1.3.0\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2018-03-05 22:44+0100\n"
-"PO-Revision-Date: 2018-03-05 22:44+0100\n"
+"POT-Creation-Date: 2019-12-28 12:08+0100\n"
+"PO-Revision-Date: 2019-12-28 12:08+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en@quot\n"
@@ -186,14 +186,18 @@ msgstr "Invalid display settings: "
 msgid "The specified display index has no settings: "
 msgstr "The specified display index has no settings: "
 
-#: src/display.cpp:41
+#: src/display.cpp:55
 msgid "CGGetOnlineDisplayList returned error: "
 msgstr "CGGetOnlineDisplayList returned error: "
 
-#: src/display.cpp:138
+#: src/display.cpp:171 src/display.cpp:210
+msgid "Cannot get brightness of display: "
+msgstr "Cannot get brightness of display: "
+
+#: src/display.cpp:193
 msgid "IODisplayGetFloatParameter returned error: "
 msgstr "IODisplayGetFloatParameter returned error: "
 
-#: src/display.cpp:158
+#: src/display.cpp:235
 msgid "IODisplaySetFloatParameter returned error: "
 msgstr "IODisplaySetFloatParameter returned error: "

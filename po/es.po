@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: display-control 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2018-03-05 22:44+0100\n"
-"PO-Revision-Date: 2017-08-28 16:27+0200\n"
+"POT-Creation-Date: 2019-12-28 12:08+0100\n"
+"PO-Revision-Date: 2019-12-28 12:14+0100\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -165,15 +165,19 @@ msgstr "Impostaciones del monitor inválidas: "
 msgid "The specified display index has no settings: "
 msgstr "El monitor con el índice especificado no tiene impostaciones: "
 
-#: src/display.cpp:41
+#: src/display.cpp:55
 msgid "CGGetOnlineDisplayList returned error: "
 msgstr "CGGetOnlineDisplayList devolvió un error: "
 
-#: src/display.cpp:138
+#: src/display.cpp:171 src/display.cpp:210
+msgid "Cannot get brightness of display: "
+msgstr "No se puede recuperar la luminosidad del monitor: "
+
+#: src/display.cpp:193
 msgid "IODisplayGetFloatParameter returned error: "
 msgstr "IODisplayGetFloatParameter devolvió un error: "
 
-#: src/display.cpp:158
+#: src/display.cpp:235
 msgid "IODisplaySetFloatParameter returned error: "
 msgstr "IODisplaySetFloatParameter devolvió un error: "
 

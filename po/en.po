@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: display-control 1.1.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2018-03-05 22:44+0100\n"
-"PO-Revision-Date: 2017-08-04 22:54+0200\n"
+"POT-Creation-Date: 2019-12-28 12:08+0100\n"
+"PO-Revision-Date: 2019-12-28 12:13+0100\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -27,11 +27,11 @@ msgstr "Invalid display number: "
 
 #: src/display_control.cpp:149
 msgid "Unexpected option received: "
-msgstr ""
+msgstr "Unexpected option received: "
 
 #: src/display_control.cpp:149
 msgid "This is likely a bug."
-msgstr ""
+msgstr "This is likely a bug."
 
 #: src/display_control.cpp:162
 msgid "Invalid number of arguments."
@@ -90,14 +90,12 @@ msgid "List displays.\n"
 msgstr "List displays.\n"
 
 #: src/display_control.cpp:212
-#, fuzzy
 msgid "Restore display brightness.\n"
-msgstr "Set brightness to b.\n"
+msgstr "Restore display brightness.\n"
 
 #: src/display_control.cpp:213
-#, fuzzy
 msgid "Save display brightness.\n"
-msgstr "Set brightness to b.\n"
+msgstr "Save display brightness.\n"
 
 #: src/display_control.cpp:214
 msgid "Print verbose output.\n"
@@ -138,12 +136,13 @@ msgid ""
 "No operation was performed.\n"
 " This is probably a bug.\n"
 msgstr ""
+"No operation was performed.\n"
+"This is probably a bug.\n"
 
 #: src/display_control.cpp:277 src/display_control.cpp:306
 #: src/display_control.cpp:339
-#, fuzzy
 msgid "Invalid display "
-msgstr "Invalid display number: "
+msgstr "Invalid display "
 
 #: src/display_control.cpp:319
 msgid "n/a"
@@ -151,29 +150,32 @@ msgstr "n/a"
 
 #: src/display_control.cpp:346
 msgid "Display has no configuration: "
-msgstr ""
+msgstr "Display has no configuration: "
 
 #: src/display_user_settings.cpp:65
 msgid "Couldn't retrieve user home directory"
-msgstr ""
+msgstr "Couldn't retrieve user home directory"
 
 #: src/display_user_settings.cpp:109 src/display_user_settings.cpp:132
-#, fuzzy
 msgid "Invalid display settings: "
-msgstr "Invalid display number: "
+msgstr "Invalid display settings: "
 
 #: src/display_user_settings.cpp:156
 msgid "The specified display index has no settings: "
-msgstr ""
+msgstr "The specified display index has no settings: "
 
-#: src/display.cpp:41
+#: src/display.cpp:55
 msgid "CGGetOnlineDisplayList returned error: "
 msgstr "CGGetOnlineDisplayList returned error: "
 
-#: src/display.cpp:138
+#: src/display.cpp:171 src/display.cpp:210
+msgid "Cannot get brightness of display: "
+msgstr "Cannot get brightness of display: "
+
+#: src/display.cpp:193
 msgid "IODisplayGetFloatParameter returned error: "
 msgstr "IODisplayGetFloatParameter returned error: "
 
-#: src/display.cpp:158
+#: src/display.cpp:235
 msgid "IODisplaySetFloatParameter returned error: "
 msgstr "IODisplaySetFloatParameter returned error: "
